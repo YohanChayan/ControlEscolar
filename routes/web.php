@@ -4,6 +4,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Student\TramiteController;
+use App\Http\Controllers\Admin\AccessUserController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -19,37 +23,40 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-// Auth::routes();
 Auth::routes(['verify' => true]);
 
-Route::middleware([
-    'auth:sanctum',
-    config('jetstream.auth_session'),
-    'verified'
-])->group(function () {
-    Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+Route::group(['middleware' => ['auth']], function() {
+
+    //only verified account can access with this group
+    Route::group(['middleware' => ['verified']], function() {
+
+        Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+            Route::group([ 'prefix' => 'administrativo' , 'middleware' => ['is_admin'] ], function(){
+                //Rutas para administrativos
+                Route::resource('userAccess', AccessUserController::class );
+
+            });
+
+            Route::group([ 'prefix' => 'estudiante' ,'middleware' => ['is_student'] ], function(){
+                //Rutas para estudiantes
+
+                Route::resource('tramites', TramiteController::class );
+
+            });
+
+    });
 });
 
-//  // Email verification
+// Auth::routes();
 
-//     Route::get('/email/verify', function () {
-//         return view('auth.verify-email');
-//     })->middleware('auth')->name('verification.notice');
-//
-    Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
-        $request->fulfill();
-        return redirect('home');
-    })->middleware(['auth', 'signed'])->name('verification.verify');
-
-//     Route::post('/email/verification-notification', function (Request $request) {
-//         $request->user()->sendEmailVerificationNotification();
-//
-//         return back()->with('message', 'Verification link sent!');
-//     })->middleware(['auth', 'throttle:6,1'])->name('verification.send');
-
-
-
-//
-
+// Route::middleware([
+//     'auth:sanctum',
+//     config('jetstream.auth_session'),
+//     'verified'
+// ])->group(function () {
+//     Route::get('/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('home')->middleware('verified');
+// });
 
 // Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

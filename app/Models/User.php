@@ -9,6 +9,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Fortify\TwoFactorAuthenticatable;
 use Laravel\Jetstream\HasProfilePhoto;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Support\Facades\Crypt;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -23,6 +24,12 @@ class User extends Authenticatable implements MustVerifyEmail
      *
      * @var string[]
      */
+
+     public function tramites()
+     {
+         return $this->hasMany(Tramite::class);
+     }
+
     protected $fillable = [
         'name',
         'email',
@@ -30,6 +37,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'apellidos',
         // 'apellido_materno',
         'codigo',
+        // 'hash_code',
         'clave_carrera',
         'ciclo_admision',
         'telefono',
@@ -54,6 +62,8 @@ class User extends Authenticatable implements MustVerifyEmail
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
+        // 'codigo' => 'encrypted',
+        // 'codigo' => 'hashed',
     ];
 
     /**
@@ -64,4 +74,5 @@ class User extends Authenticatable implements MustVerifyEmail
     protected $appends = [
         'profile_photo_url',
     ];
+
 }

@@ -1,7 +1,4 @@
-<!-- Favicon -->
-{{-- <link href="img/favicon.ico" rel="icon"> --}}
-
-<!-- Google Web Fonts -->
+{{-- Template --}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -12,7 +9,7 @@
 
 <!-- Libraries Stylesheet -->
 <link href="{{asset('custom/dashboard/lib/owlcarousel/assets/owl.carousel.min.css')}}" rel="stylesheet">
-<link href="{{asset('custom/dashboard/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet" />
+<link href="{{asset('custom/dashboard/lib/tempusdominus/css/tempusdominus-bootstrap-4.min.css')}}" rel="stylesheet"/>
 
 <!-- Customized Bootstrap Stylesheet -->
 <link href="{{asset('custom/dashboard/css/bootstrap.min.css')}}" rel="stylesheet">

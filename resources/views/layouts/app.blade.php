@@ -7,41 +7,25 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    {{-- <title>{{ config('app.name', 'Laravel') }}</title> --}}
     <title>Control Escolar</title>
-
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
-    <!-- Fonts -->
-    <link rel="dns-prefetch" href="//fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
-
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
     {{-- dashboard --}}
     @include('layouts.custom_links')
 </head>
 <body>
     <div id="app">
-
-    @if(Auth::Check())
-        @include('layouts.sidebar_navbar')
-            <div class="py-2">
+        @if(Auth::Check() && !is_null( Auth()->user()->email_verified_at ) )
+            {{-- Template --}}
+            @include('layouts.main')
+        @else
+            {{-- Bootstrap default Login --}}
+            @include('layouts.navbar')
+            <main class="py-5">
                 @yield('content')
-            </div>
-        </div>
-    @else
-        @include('layouts.navbar')
-        <main class="py-5">
-            @yield('content')
-        </main>
-    @endif
+            </main>
+        @endif
 
-
-
-        @include('layouts.scripts')
+        @include('sweetalert::alert')
     </div>
 </body>
 </html>

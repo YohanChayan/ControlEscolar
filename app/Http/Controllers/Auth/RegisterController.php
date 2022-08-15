@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
+use App\Models\Carrera;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Crypt;
 
 class RegisterController extends Controller
 {
@@ -29,7 +32,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
+    // protected $redirectTo = RouteServiceProvider::HOME;
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -41,6 +45,18 @@ class RegisterController extends Controller
         $this->middleware('guest');
     }
 
+
+    public function showRegistrationForm()
+    {
+        //explicit return to view users register
+
+        // $careers = Carrera::select('nombre')->get();
+        $careers = Carrera::select( DB::raw("CONCAT(clave, ' - ', nombre) AS nombre") )->get();
+        return view('auth.register')
+            ->with('carreras', $careers)
+        ;
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *
@@ -49,15 +65,35 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        return Validator::make($data, [
+        if($data['user_type'] == 'student'){
+            // 'regex:/(.*)@alumnos\.udg.mx/i',
+
+            $validated =  Validator::make($data, [
+                'name' => ['required', 'string', 'max:255'],
+                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'apellidos' => ['required', 'string', 'max:255'],
+                'codigo' => ['required', 'string', 'min:9' , 'max:9','unique:users'],
+                'telefono' => ['required', 'string', 'min:10' , 'max:15'],
+                'clave_carrera' => ['required', 'string', 'max:255'],
+                'ciclo_admision' => ['required', 'string', 'max:255'],
+                'password' => ['required', 'string', 'min:8', 'confirmed'],
+            ]);
+
+            return $validated;
+        }
+
+        $validated =  Validator::make($data, [
             'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255' , 'regex:/(.*)@(alumnos|academicos)\.udg.mx/i', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:255' , 'unique:users'],
             'apellidos' => ['required', 'string', 'max:255'],
-            'codigo' => ['required', 'string', 'min:7' , 'max:9'],
-            'clave_carrera' => ['required', 'string', 'max:255'],
-            'ciclo_admision' => ['required', 'string', 'max:255'],
+            'codigo' => ['required', 'string', 'min:7' , 'max:7' ,'unique:users'],
+            'telefono' => ['required', 'string', 'min:10' , 'max:15'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
+
+            // 'regex:/(.*)@(academicos|administrativos)\.udg.mx/i',
+
+        return $validated;
     }
 
     /**
@@ -72,7 +108,9 @@ class RegisterController extends Controller
             'name' => $data['name'],
             'email' => $data['email'],
             'apellidos' => $data['apellidos'],
-            'codigo' => $data['codigo'],
+            // 'codigo' =>  Crypt::encryptString($data['codigo']),
+            'codigo' =>  $data['codigo'],
+            'telefono' =>  $data['telefono'],
             'clave_carrera' => $data['clave_carrera'],
             'ciclo_admision' => $data['ciclo_admision'],
             'password' => Hash::make($data['password']),
