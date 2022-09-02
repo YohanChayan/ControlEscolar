@@ -23,7 +23,9 @@ class UserSeeder extends Seeder
             'apellidos' => 'Chayan Leonett',
             'email' => 'yohan.chayan7502@alumnos.udg.mx',
             'codigo' => '219750264',
-            'telefono' => '3320494387',
+            'telefono' => '+14155238886',
+            // 'telefono' => '+523320494387',
+            'carrera_id' => 1,
             'clave_carrera' => 'ANT LANT - Licenciatura en Antropología',
             'ciclo_admision' => '2019A',
             'password' => Hash::make('1q2w3e4r'),
@@ -54,6 +56,8 @@ class UserSeeder extends Seeder
             'password' => Hash::make('1q2w3e4r'),
             'email_verified_at' => Carbon::now(),
         ]);
+
+        User::factory()->count(12)->create();
 
     }
 }

@@ -13,6 +13,18 @@ class Tramite extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function solicitados(){
+        return $this->hasMany(TramiteSolicitado::class);
+    }
+
+    protected $fillable = [
+        'nombre_tramite',
+        'monto',
+        'requerimientos',
+    ];
+
+
+
     public function GetMontoByTramite($name_procedure){
         if($name_procedure == 'Certificado parcial de estudio'){
             return '$91.00';

@@ -19,7 +19,7 @@
                     </div>
                 @endif
 
-                <form action="{{ route('tramites.store') }}" method="POST">
+                <form action="{{ route('tramites.generar') }}" method="POST">
                     @csrf
                     <div class="row g-3">
                         <div class="mb-3 col-md-6">

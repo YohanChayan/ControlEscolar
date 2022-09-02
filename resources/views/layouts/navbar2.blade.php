@@ -5,7 +5,8 @@
     <a href="#" class="sidebar-toggler flex-shrink-0">
         <i class="fa fa-bars"></i>
     </a>
-    <form class="d-none d-md-flex ms-4">
+    <form action="{{route('tramites.listados')}}" class="d-none d-md-flex ms-4" method="post" >
+        @csrf
         <input class="form-control border-0" type="search" placeholder="Buscar">
     </form>
     <div class="navbar-nav align-items-center ms-auto">

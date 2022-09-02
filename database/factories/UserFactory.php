@@ -7,6 +7,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
+use Illuminate\Support\Facades\Hash;
+
 
 class UserFactory extends Factory
 {
@@ -25,11 +27,20 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
+
+            'role' => 'student',
             'name' => $this->faker->name(),
+            'apellidos' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
-            'email_verified_at' => now(),
-            'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'telefono' => $this->faker->phoneNumber,
+            'carrera_id' => 2,
+            'clave_carrera' => 'COP - Licenciatura en Comunicación Pública',
+            'ciclo_admision' => '2022B',
+            'codigo' => $this->faker->unique()->randomNumber($nbDigits = 9, $strict = true),
+            // 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'password' => Hash::make('123'),
             'remember_token' => Str::random(10),
+            'email_verified_at' => now(),
         ];
     }
 

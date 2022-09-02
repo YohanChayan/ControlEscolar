@@ -1,10 +1,26 @@
 @extends('layouts.app')
 
+@section('my_scripts')
+    <script>
+      $(document).ready( function () {
+          $('#TramitesPendientesTable').DataTable();
+      });
+    </script>
+
+    <script>
+        var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+        var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+            return new bootstrap.Tooltip(tooltipTriggerEl);
+        })
+    </script>
+
+@endsection
+
 @section('content')
 
 <div class="container">
     <!-- Sale & Revenue Start -->
-    <div class="container-fluid pt-4 px-4">
+    <div class="container-fluid p-2">
 
         @if (session('estatus'))
             <div class="alert alert-success">
@@ -52,20 +68,35 @@
                 </div>
             </div>
         </div>
-    </div>
+    {{-- </div> --}}
     <!-- Sale & Revenue End -->
+    <div class="col-md-8 col-xl-8 my-4 mx-auto">
+        <div class="bg-light rounded h-100 p-4">
+            <h6 class="mb-4">Ingrese código QR</h6>
+            <div class="form-floating">
+                <textarea class="form-control" placeholder="Leave a comment here" id="floatingTextarea" style="height: 150px;"></textarea>
+                <label for="floatingTextarea">QR</label>
+            </div>
+        <button type="button" class="btn btn-primary m-2">Buscar
+            <i class="far fa-file-alt ms-2"></i>
+        </button>
+        </div>
+    </div>
+
     @endcan
 
     <!-- Recent Sales Start -->
     @can('student')
-    <div class="container-fluid pt-4 px-4">
-        <div class="bg-light text-center rounded p-4">
+        <div class="bg-light container-fluid p-4">
+        <div class="text-center rounded ">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h6 class="mb-0">Tramites solicitados</h6>
+                <h5 class="mb-0">Tramites solicitados</h5>
                 <a href="#">Mostrar todos</a>
             </div>
+        </div>
+
             <div class="table-responsive">
-                <table class="table text-start align-middle table-bordered table-hover mb-0">
+                <table id="TramitesPendientesTable" class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
                             {{-- <th scope="col">#</th> --}}
@@ -81,20 +112,43 @@
                             @foreach($tramites as $tr)
                                 <tr>
                                     {{-- <th scope="row">{{$index}}</th> --}}
-                                    <td> {{$tr->nombre_tramite}} </td>
-                                    <td> {{$tr->monto}} </td>
+                                    <td> {{$tr->tramite->nombre_tramite}} </td>
+                                    <td> {{$tr->tramite->monto}} </td>
                                     <td> {{  date("d M Y", strtotime($tr->created_at)) }} </td>
                                     <td> {{$tr->estatus}} </td>
                                     <td>
-                                        <a href="#" class="btn btn-sm btn-primary m-1" href="">Detalles</a>
-                                        <a href="#" class="btn btn-sm btn-success m-1" href="">Formato</a>
+                                        <div class="d-flex justify-content-evenly align-items-center">
+                                            <div class="col-md-4">
+                                                <a class="text-primary" style="cursor: pointer;">
+                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Detalles">
+                                                        <i class="fas fa-eye mx-2"></i>
+                                                     </span>
+                                                </a>
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <a class="text-secondary" style="cursor: pointer;" >
+                                                    <span data-bs-toggle="tooltip" data-bs-placement="top" title="Formato">
+                                                        {{-- <i class="fas fa-file mx-2"></i> --}}
+                                                        <i class="far fa-file-alt me-2"></i>
+                                                     </span>
+                                                </a>
+                                            </div>
+                                        </div>
+
+
+
                                     </td>
                                 </tr>
-                                {{-- @php($index++) --}}
                             @endforeach
 
                     </tbody>
                 </table>
+
+                {{-- <div class="d-flex justify-content-center align-items-center my-4">
+                    {{ $tramites->links() }}
+                </div> --}}
+
             </div>
         </div>
     </div>

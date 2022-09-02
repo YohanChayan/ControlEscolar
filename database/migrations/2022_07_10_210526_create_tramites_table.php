@@ -17,8 +17,7 @@ class CreateTramitesTable extends Migration
             $table->id();
             $table->string('nombre_tramite');
             $table->string('monto');
-            $table->foreignId('user_id')->constrained(); // ->onDelete('cascade')->onUpdate('cascade');
-            $table->string('estatus', 150);
+            $table->text('requerimientos'); //delimitar ','
 
             $table->timestamps();
         });

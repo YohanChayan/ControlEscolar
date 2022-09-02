@@ -16,3 +16,6 @@
 
 <!-- Template Stylesheet -->
 <link href="{{asset('custom/dashboard/css/style.css')}}" rel="stylesheet">
+
+{{-- DataTable --}}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">

@@ -16,15 +16,28 @@ class AccessUserController extends Controller
      */
     public function index()
     {
-        $users = User::select('name', 'email', 'apellidos','codigo','estatus', 'created_at')
-            ->whereRaw('LENGTH(codigo) = 7')
-            ->orderBy('created_at', 'desc')
-            ->limit(5)
-            ->get();
+        $data = $this->refreshTable();
+        $html_table = view('admin.accesos.ajax.index_accesosTable')->with('users', $data);
+        return view('admin.accesos.index')->with('data', $html_table);
+    }
 
-        // Implementar Dias pasados en el que los usuarios recientes fueron registrados ej (Ayer, hace 1 dia)
+    public function refreshTable()
+    {
+        $users = User::select('id','name', 'email', 'apellidos','codigo','estatus', 'created_at')
+        ->whereRaw('LENGTH(codigo) = 7')
+        ->orderBy('created_at', 'desc')
+        ->get();
+        return $users;
+    }
 
-        return view('admin.user_access_index')->with('users', $users);
+    public function grantUser($id)
+    {
+
+    }
+
+    public function revokeUser($id)
+    {
+
     }
 
     /**
@@ -43,9 +56,20 @@ class AccessUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+     // store --for-- GRANT USER
     public function store(Request $request)
     {
-        //
+        $this->authorize('admin');
+        $validated = $request->validate([
+            'user_id' => 'required',
+        ]);
+        $user = User::find($request->input('user_id'));
+        $user->estatus = 'Activo';
+        $user->update();
+
+        $data = $this->refreshTable();
+        return view('admin.accesos.ajax.index_accesosTable')->with('users', $data);
     }
 
     /**
@@ -88,8 +112,14 @@ class AccessUserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+
+     // Soft deleted method
+    public function destroy($id)
     {
-        //
+        $user = User::find($id);
+        $user->estatus = 'Inactivo';
+        $user->save();
+        $data = $this->refreshTable();
+        return view('admin.accesos.ajax.index_accesosTable')->with('users', $data);
     }
 }

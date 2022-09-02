@@ -5,7 +5,7 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Student\TramiteController;
+use App\Http\Controllers\TramiteController;
 use App\Http\Controllers\Admin\AccessUserController;
 
 /*
@@ -35,15 +35,21 @@ Route::group(['middleware' => ['auth']], function() {
 
             Route::group([ 'prefix' => 'administrativo' , 'middleware' => ['is_admin'] ], function(){
                 //Rutas para administrativos
-                Route::resource('userAccess', AccessUserController::class );
+                Route::resource('userAccess', AccessUserController::class )->only('index', 'store', 'show', 'destroy');
+                Route::get('/grantUser/{id}', [AccessUserController::class, 'grantUser'])->name('userAccess.grantUser');
+                // Route::get('/revokeUser/{id}', [AccessUserController::class, 'revokeUser'])->name('userAccess.revokeUser');
 
+                Route::resource('tramites', TramiteController::class )->only('index','store', 'update', 'destroy');
+
+                Route::get('/graficas', [TramiteController::class, 'charts_index'])->name('tramites.charts');
+                Route::post('/listados', [TramiteController::class, 'search_tramite'])->name('tramites.listados');
             });
 
             Route::group([ 'prefix' => 'estudiante' ,'middleware' => ['is_student'] ], function(){
                 //Rutas para estudiantes
-
-                Route::resource('tramites', TramiteController::class );
-
+                // Route::resource('tramites', TramiteController::class );
+                    Route::get('tramites/solicitar', [TramiteController::class, 'solicitar_tramite'])->name('tramites.solicitar');
+                    Route::post('tramites/generar', [TramiteController::class, 'generar_tramite'])->name('tramites.generar');
             });
 
     });

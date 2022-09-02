@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Tramite;
+use App\Models\TramiteSolicitado;
 
 class HomeController extends Controller
 {
@@ -25,9 +26,11 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mytramites = Tramite::where('user_id', auth()->user()->id )->get();
+        $myTramites = '';
+        $myTramites = TramiteSolicitado::with('tramite')->where('user_id', auth()->user()->id )->paginate(5);
+        // dd($mytramites);
         return view('dashboard')
-            ->with('tramites', $mytramites)
+            ->with('tramites', $myTramites)
         ;
     }
 }

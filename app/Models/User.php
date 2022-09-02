@@ -30,6 +30,11 @@ class User extends Authenticatable implements MustVerifyEmail
          return $this->hasMany(Tramite::class);
      }
 
+     public function routeNotificationForWhatsApp()
+     {
+       return $this->telefono;
+     }
+
     protected $fillable = [
         'name',
         'email',
