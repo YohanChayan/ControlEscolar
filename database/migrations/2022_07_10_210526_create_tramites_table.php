@@ -16,8 +16,13 @@ class CreateTramitesTable extends Migration
         Schema::create('tramites', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_tramite');
-            $table->string('monto');
-            $table->text('requerimientos'); //delimitar ','
+            $table->decimal('monto',10,2);
+            $table->text('requerimientos'); //delimitador '|'
+            $table->string('aviso')->nullable()->default('Sin aviso');
+            $table->string('referencia')->default('9 000 000 2775');
+            $table->string('formato')->nullable()->default('formato_certificados_y_actasTitulacion'); //Path view (no modificar)
+            $table->string('modalidad')->nullable()->default('Presencial'); //
+            $table->boolean('disponible')->nullable()->default(true); //
 
             $table->timestamps();
         });

@@ -11,12 +11,16 @@ class TramiteSolicitado extends Model
 
     protected $table = 'tramites_solicitados';
 
+    public function student(){
+        return $this->belongsTo(User::class);
+    }
+
     public function tramite(){
         return $this->belongsTo(Tramite::class);
     }
 
     protected $fillable = [
-        'user_id',
+        'student_id',
         'tramite_id',
         'estatus',
         'estadistico',

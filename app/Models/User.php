@@ -25,10 +25,29 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var string[]
      */
 
+     // public function carrera()
+     // {
+     //    return $this->belongsTo(Carrera::class);
+     // }
+
+     public function ciclo()
+     {
+        return $this->belongsTo(Ciclo::class);
+     }
+
+     public function cambioCarrera(){
+         return $this->hasMany(SolicitudCambioCarrera::class);
+     }
+
      public function tramites()
      {
-         return $this->hasMany(Tramite::class);
+         return $this->hasMany(TramiteSolicitado::class);
      }
+
+     // public function registros()
+     // {
+     //     return $this->hasMany(Log::class);
+     // }
 
      public function routeNotificationForWhatsApp()
      {
@@ -44,6 +63,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'codigo',
         // 'hash_code',
         'clave_carrera',
+        'nombre_carrera',
         'ciclo_admision',
         'telefono',
     ];

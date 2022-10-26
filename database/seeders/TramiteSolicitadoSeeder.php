@@ -14,6 +14,6 @@ class TramiteSolicitadoSeeder extends Seeder
      */
     public function run()
     {
-        TramiteSolicitado::factory()->count(35)->create();
+        TramiteSolicitado::factory()->count(2000)->create();
     }
 }

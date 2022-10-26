@@ -15,7 +15,9 @@
         "laravel/ui": "^3.4",
         "laraveles/spanish": "^1.5",
         "livewire/livewire": "^2.5",
+        "niklasravnsborg/laravel-pdf": "^4.1",
         "realrashid/sweet-alert": "^5.1",
+        "simplesoftwareio/simple-qrcode": "^4.2",
         "twilio/sdk": "^6.40"
     },
     "require-dev": {

@@ -9,11 +9,7 @@ class Tramite extends Model
 {
     use HasFactory;
 
-    public function user(){
-        return $this->belongsTo(User::class);
-    }
-
-    public function solicitados(){
+    public function tramitesolicitados(){
         return $this->hasMany(TramiteSolicitado::class);
     }
 
@@ -21,37 +17,34 @@ class Tramite extends Model
         'nombre_tramite',
         'monto',
         'requerimientos',
+        'aviso',
     ];
 
+    public function getModality($reqs)
+    {
+        $arr = explode('|', $reqs);
 
+        $virtual = [];
+        $presencial = [];
+        foreach($arr as $item){
+            $indicator = substr($item,0,1);
 
-    public function GetMontoByTramite($name_procedure){
-        if($name_procedure == 'Certificado parcial de estudio'){
-            return '$91.00';
+            if($indicator == '_')
+                array_push($virtual, $item);
+            else
+                array_push($presencial, $item);
         }
-        if($name_procedure == 'Certificado total de estudio'){
-            return '$91.00';
-        }
-        if($name_procedure == 'Certificado de graduado'){
-            return '$218.00';
-        }
-        if($name_procedure == 'Acta de titulacion'){
-            return '$91.00';
-        }
-    }
 
-    public function GetFormatoByTramite($name_procedure){
-        if($name_procedure == 'Certificado parcial de estudio'){
-            // return '$91.00';
-        }
-        if($name_procedure == 'Certificado total de estudio'){
-            // return '$91.00';
-        }
-        if($name_procedure == 'Certificado de graduado'){
-            // return '$218.00';
-        }
-        if($name_procedure == 'Acta de titulacion'){
-            // return '$91.00';
-        }
+        $countPresencial = count($presencial);
+        $countVirtual = count($virtual);
+
+        $answer = 'Presencial';
+        if($countPresencial == 0)
+            $answer = 'Virtual';
+        else if($countPresencial > 0 && $countVirtual > 0)
+            $answer = 'Ambos';
+
+        return $answer;
+
     }
 }

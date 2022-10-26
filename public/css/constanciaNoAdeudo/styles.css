@@ -1,0 +1,292 @@
+body{
+    margin-top: 0;
+    min-width: 900px;
+    max-width: 950px;
+}
+
+.main{
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 3%;
+}
+
+.square1{
+    border: 1px solid green;
+    padding: 10px;
+}
+
+/* row */
+
+.section1{
+    display: flex;
+    justify-content: space-evenly;
+    /* height: 40%; */
+}
+
+/* Logo UDG */
+.container_logoUdg{
+    width: 10%;
+    /* margin-top: 30px; */
+}
+
+.logoUdg{
+    max-width: 100%;
+    width: 100%;
+}
+        /* --- */
+
+        /* Logo Cucsh */
+.container_direccion_finanzas{
+    width: 30%;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.universidad_finanzas{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+    /* --- */
+
+        /* formato pago */
+
+.container_datosPagos{
+    width: 56%;
+}
+
+.p_formatoPago{
+    font-weight: bold;
+    text-align: center;
+    font-size: 1.5em;
+    margin: 0;
+    margin-bottom: 25px;
+}
+
+.container_ref_monto{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 50px;
+
+}
+
+.container_referencia{
+    border: 1px solid black;
+    /* padding: 0 5px; */
+    width: 185px;
+}
+
+.p_referencia{
+    text-align: center;
+    font-size: 20px;
+    margin: 5px 0;
+}
+
+.p_referencia_value{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+.container_monto{
+    border: 1px solid black;
+    padding: 0 20px;
+    width: 35%;
+}
+
+.p_monto{
+    text-align: center;
+    font-size: 20px;
+    margin: 5px 0;
+}
+.p_monto_value{
+    text-align: center;
+    font-size: 25px;
+    font-weight: bold;
+    margin: 5px 0;
+}
+
+
+        /* Banks  */
+
+.section2{
+    display: flex;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+.container_banks{
+    width: 30%;
+    margin-top: -12px;
+    /* background-color: lightgray; */
+}
+
+.paguese{
+    text-align: center;
+    margin: 15px 0;
+}
+
+.banks_logos{
+    display: flex;
+    flex-direction: column;
+}
+
+.bank{
+    max-width: 100%;
+    display: flex;
+    margin: 5px 5px;
+}
+
+.logoBank{
+    width: 80px;
+    height: 30px;
+}
+
+.logoBank_desc{
+    padding: 0 3%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-size: 10px;
+    /* margin: 0 auto; */
+}
+
+.arancel_container{
+    border: 2px solid black;
+    width: 75%;
+    padding: 10px 15px;
+    margin: 0 auto;
+    text-align: center;
+    color: red;
+}
+.arancel_vigente{
+    font-size: 15px;
+    margin: 0;
+}
+.arancel_anio{
+    font-size: 22px;
+    margin: 0;
+    font-weight: bold;
+}
+
+        /*  sub square: info  */
+
+
+.container_subSquare{
+    /* background-color: lightblue; */
+    width: 70%;
+    margin: 0 auto;
+    border: 2px solid black;
+}
+
+.tramite_nombre{
+    width: 300px;
+    font-size: 20px;
+    margin-top: 5px;
+    padding-left: 2%;
+    font-weight: bold;
+}
+
+.form_info{
+    padding: 0 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_item{
+    display: flex;
+    margin: 5px 5px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+
+.form_Enditem{
+    border: 2px solid black;
+    margin: 20px 5px 5px 0px;
+    padding: 10px 0;
+    padding-left: 20px;
+}
+
+.label{
+    margin: 0;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.student_value{
+    margin: 0;
+    font-weight: normal;
+    /* font-size: 15px;
+    font-size: 1.2vw;
+    margin-top: 30px; */
+}
+
+.label_help{
+    width: 65%;
+    margin: 0;
+    margin-left: 50px;
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    font-weight: normal;
+}
+
+.label_help_item{
+    margin: 0;
+    margin-bottom: 20px;
+    font-size: 12px;
+}
+
+.student_value{
+    text-decoration: underline;
+}
+
+.container_arancel_bottom{
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-around;
+}
+
+.arancel_container{
+    width: 15%;
+}
+
+.cajas_finanzas{
+    display: flex;
+
+    border: 2px solid black;
+    text-align: center;
+    width: 25%;
+}
+
+.no_se_acepta{
+    padding: 5px;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.container_certificacion_banco{
+    margin: 0 auto;
+    text-align: center;
+    width: 50%;
+    border: 2px solid ;
+}
+
+.cerf_banco{
+    margin: 0;
+    margin-top: 5px;
+    margin-bottom: 20px;
+}
+
+.qr_and_folioNumber{
+
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 20px;
+    text-align: center;
+}

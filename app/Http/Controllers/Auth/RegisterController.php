@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use App\Models\Carrera;
+use App\Models\Ciclo;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
@@ -50,10 +51,12 @@ class RegisterController extends Controller
     {
         //explicit return to view users register
 
-        // $careers = Carrera::select('nombre')->get();
-        $careers = Carrera::select( DB::raw("CONCAT(clave, ' - ', nombre) AS nombre") )->get();
+        $ciclos = Ciclo::select('semestre')->orderBy('semestre', 'desc')->get();
+        $careers = Carrera::select('id', DB::raw("CONCAT(clave, ' - ', nombre) AS nombre") )->get();
+
         return view('auth.register')
             ->with('carreras', $careers)
+            ->with('ciclos', $ciclos)
         ;
     }
 
@@ -65,16 +68,15 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if($data['user_type'] == 'student'){
-            // 'regex:/(.*)@alumnos\.udg.mx/i',
+        if(strlen($data['codigo']) == 9){
 
             $validated =  Validator::make($data, [
                 'name' => ['required', 'string', 'max:255'],
-                'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+                'email' => ['required', 'string', 'email', 'max:255', 'confirmed' ,'unique:users'],
                 'apellidos' => ['required', 'string', 'max:255'],
                 'codigo' => ['required', 'string', 'min:9' , 'max:9','unique:users'],
                 'telefono' => ['required', 'string', 'min:10' , 'max:15'],
-                'clave_carrera' => ['required', 'string', 'max:255'],
+                'carrera' => ['required', 'string'],
                 'ciclo_admision' => ['required', 'string', 'max:255'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
@@ -104,14 +106,20 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        $career = explode(' - ', $data['carrera'] );
+        if(strlen($data['codigo']) == 7){
+            $career[0] = null;
+            $career[1] = null;
+        }
+
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
             'apellidos' => $data['apellidos'],
-            // 'codigo' =>  Crypt::encryptString($data['codigo']),
             'codigo' =>  $data['codigo'],
             'telefono' =>  $data['telefono'],
-            'clave_carrera' => $data['clave_carrera'],
+            'clave_carrera' => $career[0],
+            'nombre_carrera' => $career[1],
             'ciclo_admision' => $data['ciclo_admision'],
             'password' => Hash::make($data['password']),
         ]);

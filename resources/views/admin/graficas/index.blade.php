@@ -1,143 +1,100 @@
 @extends('layouts.app')
 
-@section('content')
+@section('my_scripts')
+    <script src="{{asset('js/admin/myCharts.js')}}"></script>
 
-    <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-            <div class="col-sm-12 col-xl-7">
-                <div class="bg-light rounded h-100 p-4">
-                    <h6 class="mb-4">Trámites generados por mes</h6>
-                    <canvas id="line-chart" width="902" height="450" style="display: block; box-sizing: border-box; height: 225px; width: 451px;"></canvas>
-                </div>
-            </div>
-
-
-           <div class="col-sm-12 col-xl-5">
-               <div class="bg-light rounded h-100 p-4">
-                   <h6 class="mb-4">Total de Trámites Solicitados</h6>
-                   <canvas id="bar-chart" width="902" height="450" style="display: block; box-sizing: border-box; height: 225px; width: 451px;"></canvas>
-               </div>
-           </div>
-
-        </div>
-    </div>
-
-
-
-    <div class="container-fluid pt-4 px-4">
-        <div class="row g-4">
-            <div class="col-sm-12 col-xl-6">
-                <div class="bg-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Worldwide Sales</h6>
-                        <a href="">Show All</a>
-                    </div>
-                    <canvas id="worldwide-sales" width="902" height="450" style="display: block; box-sizing: border-box; height: 225px; width: 451px;"></canvas>
-                </div>
-            </div>
-            <div class="col-sm-12 col-xl-6">
-                <div class="bg-light text-center rounded p-4">
-                    <div class="d-flex align-items-center justify-content-between mb-4">
-                        <h6 class="mb-0">Salse &amp; Revenue</h6>
-                        <a href="">Show All</a>
-                    </div>
-                    <canvas id="salse-revenue" width="902" height="450" style="display: block; box-sizing: border-box; height: 225px; width: 451px;"></canvas>
-                </div>
-            </div>
-        </div>
-    </div>
-    {{--  --}}
-
+    {{-- <script>
+        load_chart_TramitesMonths(@json($tramites_mes));
+        load_chart_TramitesGeneral(@json($general_total_tramites));
+    </script> --}}
 @endsection
 
-@section('my_scripts')
+@section('content')
 
-    <script src="{{asset('js/admin/charts.js')}}"></script>
+<div class="container-fluid pt-4 px-4">
 
-    <script>
+    <form method="POST">
+        @csrf
+    </form>
 
-        const tramites_mes = @json($tramites_mes);
-        const tramitesTotals = tramites_mes.map( tramite => tramite['Total'] );
-        const arrayMonthsLabel = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
+    <ul class="nav nav-tabs p-3" id="myTab" role="tablist">
 
-        // Single line
-        var ctx3 = $("#line-chart").get(0).getContext("2d");
-        var myChart3 = new Chart(ctx3, {
-            type: "line",
-            data: {
-                labels: arrayMonthsLabel,
-                datasets: [{
-                    label: "Total de tramites",
-                    fill: false,
-                    backgroundColor: "rgba(0, 156, 255, .3)",
-                    data: tramitesTotals
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins:{
-                    tooltip:{
-                        callbacks:{
-                            // title: function(context){
-                            //     return `Total: ${tramites_Totals[context[0].dataIndex]}`;
-                            // },
-                            afterBody: function(context){
-                                return ` - Certificado Parcial de Estudio:  ${tramites_mes[context[0].dataIndex]['Certificado parcial de estudio']} \n - Certificado Total de Estudio:  ${tramites_mes[context[0].dataIndex]['Certificado total de estudio']} \n - Certificado de Graduado:  ${tramites_mes[context[0].dataIndex]['Certificado de graduado']} \n - Acta de titulacion:  ${tramites_mes[context[0].dataIndex]['Acta de titulacion']}`;
-                            }
-                        }
-                    }
-                }
-            },
-            scales: {
-                y:{
-                    beginAtZero: true
-                }
-            }
-        });
+      <li class="nav-item me-4" role="presentation">
+        <button class="nav-link active" id="seleccione-tab" data-bs-toggle="tab" data-bs-target="#seleccione" type="button" role="tab" aria-controls="seleccione" aria-selected="true"> - </button>
+      </li>
+
+      <li class="nav-item ms-4" role="presentation">
+        <button onclick="switchChart(this.id)" class="nav-link" id="tramites_mes-tab" data-bs-toggle="tab" data-bs-target="#tramites_mes" type="button" role="tab" aria-controls="tramites_mes" aria-selected="true">Tramites generados por meses</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button onclick="switchChart(this.id)" class="nav-link" id="top_tramites-tab" data-bs-toggle="tab" data-bs-target="#top_tramites" type="button" role="tab" aria-controls="top_tramites" aria-selected="false">TOP Tramites mas solicitados</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button onclick="switchChart(this.id)" class="nav-link" id="summary_tramites-tab" data-bs-toggle="tab" data-bs-target="#summary_tramites" type="button" role="tab" aria-controls="summary_tramites" aria-selected="false">Resumen de trámites</button>
+      </li>
+
+      <li class="nav-item" role="presentation">
+        <button onclick="switchChart(this.id)" class="nav-link" id="tramites_perCareer-tab" data-bs-toggle="tab" data-bs-target="#tramites_perCareer" type="button" role="tab" aria-controls="tramites_perCareer" aria-selected="false">Trámites por carrera</button>
+      </li>
+
+    </ul>
 
 
-        const general_total_tramites = @json($general_total_tramites);
-        const generalTotals = general_total_tramites.map( gt => gt['Total'] )
-        console.log(general_total_tramites);
+    <div class="tab-content bg-light p-3" id="myTabContent">
 
-        // Single Bar Chart
-        var ctx4 = $("#bar-chart").get(0).getContext("2d");
-        var myChart4 = new Chart(ctx4, {
-            type: "bar",
-            data: {
-                labels: ["#1", "#2", "#3", "#4"],
-                datasets: [{
-                    label: "Total de tramites",
-                    backgroundColor: [
-                        "rgba(0, 156, 255, .8)",
-                        "rgba(0, 156, 255, .7)",
-                        "rgba(0, 156, 255, .6)",
-                        "rgba(0, 156, 255, .5)",
+      <div class="tab-pane fade show active" id="seleccione" role="tabpanel" aria-labelledby="seleccione-tab">
+        <p class="fs-3 text-secondary text-center mt-2">Seleccione una gráfica de preferencia</p>
+      </div>
 
-                        // "rgba(0, 156, 255, .4)",
-                        // "rgba(0, 156, 255, .3)",
-                        // "rgba(0, 156, 255, .3)",
-                        // "rgba(0, 156, 255, .3)",
-                        // "rgba(0, 156, 255, .3)",
-                        // "rgba(0, 156, 255, .3)",
-                    ],
-                    data: generalTotals
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins:{
-                    tooltip:{
-                        callbacks:{
-                            footer: function(context){
-                                return ` - ${general_total_tramites[context[0].dataIndex]['tramite']['nombre_tramite']}: ${general_total_tramites[context[0].dataIndex]['Total']} `;
-                            }
-                        }
-                    }
-                }
-            }
-        });
+      <div class="tab-pane fade" id="tramites_mes" role="tabpanel" aria-labelledby="tramites_mes-tab">
+      {{--  --}}
+        <div class="container-fluid pt-4 px-4">
+            <div class="col-sm-12 col-xl-10 mx-auto">
+                <div class="bg-light rounded h-100 p-4 text-center" id="tramites_mesContainer">
 
-    </script>
+                    <h6 class="display-5 text-secondary fw-bold text-center">Trámites generados por mes</h6>
+                    <canvas id="tramites_mes_chart"></canvas>
+                </div>
+            </div>
+        </div>
+
+
+      </div>
+      <div class="tab-pane fade" id="top_tramites" role="tabpanel" aria-labelledby="top_tramites-tab">
+      {{--  --}}
+        <div class="container-fluid pt-4 px-4">
+            <div class="col-sm-12 col-xl-10 mx-auto">
+                   <div class="bg-light rounded h-100 p-4" id="top_tramitesContainer">
+                       <h6 class="display-5 text-secondary fw-bold text-center">TOP Trámites Solicitados</h6>
+                       <canvas id="top_tramites_chart"></canvas>
+                   </div>
+               </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="summary_tramites" role="tabpanel" aria-labelledby="summary_tramites-tab">
+        <div class="container-fluid pt-4 px-4">
+            <div class="col-sm-12 col-xl-10 mx-auto">
+                   <div class="bg-light rounded h-100 p-4" id="">
+                       <h6 class="display-5 text-secondary fw-bold text-center"> Resumen de trámites en {{Carbon\Carbon::now()->format('Y')}} </h6>
+                       <canvas id="summary_tramites_chart"></canvas>
+                   </div>
+               </div>
+        </div>
+      </div>
+
+      <div class="tab-pane fade" id="tramites_perCareer" role="tabpanel" aria-labelledby="tramites_perCareer-tab">
+        <div class="container-fluid pt-4">
+            <div class="col-sm-12 col-xl-12 mx-auto bg-light" style="height:2000px; ">
+                   <div class="bg-light rounded h-100">
+                       <h6 class="display-5 text-secondary fw-bold text-center"> Trámites Solicitados por Carrera </h6>
+
+                            <canvas id="tramites_perCareer_chart"></canvas>
+                   </div>
+               </div>
+        </div>
+      </div>
+    </div>
+</div>
 
 @endsection

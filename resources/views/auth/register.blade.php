@@ -1,4 +1,10 @@
 @extends('layouts.app')
+
+@section('my_scripts')
+    <script src="{{asset('js/registration/register.js')}}"></script>
+@endsection
+
+
 @section('content')
 
 <style>
@@ -27,6 +33,7 @@
         padding-left: 2px;
     }
 </style>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -34,7 +41,7 @@
                 <div class="card-header">{{ __('Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" id="registerForm">
                         @csrf
 
                         @if ($errors->any())
@@ -47,7 +54,7 @@
                             </div>
                         @endif
 
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="user_type" class="col-md-4 col-form-label text-md-end">{{ __('Tipo de cuenta') }}<span class="my-required-asterisk"></span> </label>
 
                             <div class="col-md-6">
@@ -64,7 +71,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}<span class="my-required-asterisk"></span> </label>
@@ -98,7 +105,7 @@
                             <label for="codigo" class="col-md-4 col-form-label text-md-end">{{ __('Código') }}<span class="my-required-asterisk"></span> </label>
 
                             <div class="col-md-6">
-                                <input id="codigo" type="text" class="form-control @error('codigo') is-invalid @enderror" name="codigo" value="{{ old('codigo') }}" required autocomplete="codigo" autofocus>
+                                <input id="codigo" type="text" class="form-control @error('codigo') is-invalid @enderror" name="codigo" value="{{ old('codigo') }}" required autocomplete="codigo" autofocus onchange="detectingCode(this.value)">
 
                                 @error('codigo')
                                     <span class="invalid-feedback" role="alert">
@@ -123,44 +130,55 @@
                         </div>
 
                         <div class="row mb-3" id="container_clave_carr">
-                            <label for="clave_carrera" class="col-md-4 col-form-label text-md-end">{{ __('Clave de la carrera') }}<span class="my-required-asterisk"></span> </label>
+                            <label for="carrera" class="col-md-4 col-form-label text-md-end">{{ __('Clave de la carrera') }}<span class="my-required-asterisk"></span> </label>
 
                             <div class="col-md-6">
 
-                                <input name="clave_carrera" class="form-control" list="carrera_list_options" id="clave_carrera" placeholder="Ingrese el nombre de la carrera..." value="{{ old('clave_carrera') }}">
+                                <input name="carrera" class="form-control" list="carrera_list_options" id="carrera" placeholder="Ingrese el nombre de la carrera..." value="{{ old('carrera') }}">
                                     <datalist id="carrera_list_options">
                                     @foreach($carreras as $car)
-
                                         <option value="{{$car->nombre}}">
-
-                                      {{-- <option value="San Francisco">
-                                      <option value="New York">
-                                      <option value="Seattle">
-                                      <option value="Los Angeles">
-                                      <option value="Chicago"> --}}
-
                                     @endforeach
                                     </datalist>
 
-                                @error('clave_carrera')
+                                @error('carrera')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
+                                <div id="cicloHelp" class="form-text">
+                                    En caso de no saber su clave de carrera puede verificarlo directamente desde Siiau.
+                                    <span class="d-block my-2">
+                                        <span class="fw-bold">Atención:</span> Asegurarse de colocar la misma clave que aparace en Siiau.
+                                    </span>
+                                </div>
+
                             </div>
                         </div>
 
-                        <div class="row mb-3" id="container_ciclo">
+                        <div class="row mb-4" id="container_ciclo">
                             <label for="ciclo_admision" class="col-md-4 col-form-label text-md-end">{{ __('Ciclo de admisión') }}<span class="my-required-asterisk"></span> </label>
 
                             <div class="col-md-6">
-                                <input id="ciclo_admision" type="text" class="form-control @error('ciclo_admision') is-invalid @enderror" name="ciclo_admision" value="{{ old('ciclo_admision') }}" autocomplete="ciclo_admision" autofocus>
+
+                               <input name="ciclo_admision" class="form-control" list="ciclos_list_options" id="ciclo_admision" placeholder="Ingrese el ciclo de admisión..." value="{{ old('ciclo_admision') }}">
+                               <datalist id="ciclos_list_options">
+                               @foreach($ciclos as $ci)
+                                   <option value="{{$ci->semestre}}">
+                               @endforeach
+                               </datalist>
 
                                 @error('ciclo_admision')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+
+                                <div id="cicloHelp" class="form-text">
+                                    En caso de no saber su ciclo de admisión puede verificarlo directamente desde Siiau.
+                                </div>
+
                             </div>
                         </div>
 
@@ -175,7 +193,19 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                                <div id="correoHelp" class="form-text">
+                                    De preferencia usar <span class="fw-bold">correo institucional</span>.
+                                </div>
                             </div>
+                        </div>
+                        <div class="row mb-3">
+                            <label for="email-confirm" class="col-md-4 col-form-label text-md-end">{{ __('Confirmar Correo') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email-confirm" type="email" class="form-control" name="email_confirmation" required autocomplete="new-email">
+                                <span class="fw-bold"> Confirmar </span>correo electrónico
+                            </div>
+                            <small class="dismatch_confirm-email text-danger fw-bold d-none">Confirmación de correo no coincide</small>
                         </div>
 
                         <div class="row mb-3">
@@ -202,7 +232,7 @@
 
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                                <button type="submit" id="btn-submitRegister" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
@@ -213,57 +243,4 @@
         </div>
     </div>
 </div>
-
-<script>
-    const user_type = document.getElementById('user_type');
-    let showDataAnimation = false;
-
-    user_type.addEventListener('change', function(){
-        const currentValue = user_type.value;
-        const container_ciclo = document.getElementById('container_ciclo');
-        const container_clave_carr = document.getElementById('container_clave_carr');
-
-        if(currentValue == 'student'){
-            document.getElementById('ciclo_admision').required = true;
-            document.getElementById('clave_carrera').required = true;
-            container_ciclo.classList.remove("d-none");
-            container_clave_carr.classList.remove("d-none");
-
-            if(showDataAnimation){
-
-                container_clave_carr.classList.remove('my_element', 'hide-element');
-                container_clave_carr.classList.add('my-element', 'show-element')
-                container_ciclo.classList.remove('my_element', 'hide-element');
-                container_ciclo.classList.add('my-element', 'show-element')
-
-                showDataAnimation = false;
-            }
-
-        }else if(currentValue == 'admin'){
-
-            container_clave_carr.classList.remove('my_element', 'show-element');
-            container_clave_carr.classList.add('my-element', 'hide-element')
-            container_ciclo.classList.remove('my_element', 'show-element');
-            container_ciclo.classList.add('my-element', 'hide-element')
-            showDataAnimation = true;
-        }
-    });
-
-    container_clave_carr.addEventListener('animationend', (event) => {
-        if(!showDataAnimation){
-            container_clave_carr.classList.remove('d-none');
-        }else{
-            container_clave_carr.classList.add('d-none');
-        }
-    });
-
-    container_ciclo.addEventListener('animationend', (event) => {
-        if(!showDataAnimation){
-            container_ciclo.classList.remove('d-none');
-        }else{
-            container_ciclo.classList.add('d-none');
-        }
-    });
-</script>
-
 @endsection

@@ -27,7 +27,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        // Paginator::useBootstrap();
+        Paginator::useBootstrap();
 
         // Configuración para fechas en español
         Carbon::setUTF8(true);

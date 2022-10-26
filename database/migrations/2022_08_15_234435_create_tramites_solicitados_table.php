@@ -15,11 +15,19 @@ class CreateTramitesSolicitadosTable extends Migration
     {
         Schema::create('tramites_solicitados', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained(); // ->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('tramite_id')->constrained('tramites', 'id');
-            $table->string('estatus', 150)->default('Recepción de tramite recibido en CE');
-            $table->tinyInteger('estadistico')->default(1);
-            $table->unsignedBigInteger('folio'); //folio: se puede repetir pero por cada tipo de tramite es distinto.
+            $table->unsignedBigInteger('folio'); //folio: se puede repetir pero por cada tipo de tramite es unico.
+            $table->foreignId('student_id')->constrained('users','id');
+            $table->foreignId('tramite_id')->constrained('tramites','id');
+            $table->string('estatus')->default('Iniciado')->nullable();
+            $table->string('categoria')->default('solicitado');
+            $table->text('motivo')->nullable();
+            $table->string('files')->nullable();
+
+            $table->text('requerimientos_asignados')->nullable();
+
+            $table->decimal('total_a_pagar', 10 ,2)->default(0)->nullable(); //solo aplica a constancia no adeudo
+            $table->string('ultima_matricula_pagada')->default('')->nullable(); //solo aplica a constancia no adeudo
+            $table->integer('matriculas_pendientes')->default('0')->nullable(); //solo aplica a constancia no adeudo
 
             $table->timestamps();
         });

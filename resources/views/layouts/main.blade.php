@@ -20,6 +20,18 @@
 
     <div class="container-fluid">
         @yield('content')
+        {{-- <div class="container-fluid pt-4 px-4">
+            <div class="bg-light rounded-top p-4">
+                <div class="row">
+                    <div class="col-12 col-sm-6 text-center text-sm-start">
+                        <a href="#">Control Escolar</a>
+                    </div>
+                    <div class="col-12 col-sm-6 text-center text-sm-end">
+                        Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+                    </div>
+                </div>
+            </div>
+        </div> --}}
     </div>
 
 </div>
@@ -30,10 +42,33 @@
     <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
 {{-- </div> --}}
 
+
+
+<!-- Footer -->
+{{-- <div class="container-fluid pt-4 px-4">
+    <div class="bg-light rounded-top p-4">
+        <div class="row">
+            <div class="col-12 col-sm-6 text-center text-sm-start">
+                <a href="#">Control Escolar</a>
+            </div>
+            <div class="col-12 col-sm-6 text-center text-sm-end">
+                Designed By <a href="https://htmlcodex.com">HTML Codex</a>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
+
+{{-- <footer class="footer mt-auto py-3 bg-light">
+    <div class="container-fluid">
+      <span class="text-light">Place sticky footer content here.</span>
+    </div>
+</footer> --}}
+
 </div>
 @include('layouts.scripts')
 
-@yield('my_scripts')
+{{-- @yield('my_scripts') --}}
 
 
 

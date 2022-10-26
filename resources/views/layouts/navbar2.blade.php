@@ -5,27 +5,27 @@
     <a href="#" class="sidebar-toggler flex-shrink-0">
         <i class="fa fa-bars"></i>
     </a>
-    <form action="{{route('tramites.listados')}}" class="d-none d-md-flex ms-4" method="post" >
+    @canany(['coordinador', 'admin'])
+    <form action="{{route('tramites.seguimiento')}}" class="d-none d-md-flex ms-4" method="post">
         @csrf
-        <input class="form-control border-0" type="search" placeholder="Buscar">
+        <input class="form-control border-0" id="tramite_id" name="tramite_id" type="text" placeholder="Buscar">
     </form>
+    @endcanany
+
     <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
+            <span class="fw-bold">Ciclo escolar actual: </span>
+            <span class="fw-bold text-primary" id="current_ciclo_value"> {{App\Models\Ciclo::where('selected', true)->first()->semestre ?? 'No asignado'}} </span>
+        </div>
+    </div>
+
+    <div class="navbar-nav align-items-center ms-auto">
+        {{-- <div class="nav-item dropdown">
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
                 <i class="fa fa-envelope me-lg-2"></i>
                 <span class="d-none d-lg-inline-flex">Message</span>
             </a>
             <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                <a href="#" class="dropdown-item">
-                    <div class="d-flex align-items-center">
-                        <img class="rounded-circle" src="{{asset('custom/dashboard/img/user-icon.png')}}" alt="user" style="width: 40px; height: 40px;">
-                        <div class="ms-2">
-                            <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                            <small>15 minutes ago</small>
-                        </div>
-                    </div>
-                </a>
-                <hr class="dropdown-divider">
                 <a href="#" class="dropdown-item">
                     <div class="d-flex align-items-center">
                         <img class="rounded-circle" src="{{asset('custom/dashboard/img/user-icon.png')}}" alt="user" style="width: 40px; height: 40px;">
@@ -61,28 +61,21 @@
                 </a>
                 <hr class="dropdown-divider">
                 <a href="#" class="dropdown-item">
-                    <h6 class="fw-normal mb-0">New user added</h6>
-                    <small>15 minutes ago</small>
-                </a>
-                <hr class="dropdown-divider">
-                <a href="#" class="dropdown-item">
                     <h6 class="fw-normal mb-0">Password changed</h6>
                     <small>15 minutes ago</small>
                 </a>
                 <hr class="dropdown-divider">
                 <a href="#" class="dropdown-item text-center">See all notifications</a>
             </div>
-        </div>
+        </div> --}}
         <div class="nav-item dropdown">
 
             <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                <img class="rounded-circle me-lg-2" src="{{asset('custom/dashboard/img/user-icon.png')}}" alt="" style="width: 40px; height: 40px;">
+                <img class="rounded-circle me-lg-2 border border-dark" src="{{ (auth()->user()->profile_photo_path) == null ? \App\Models\User::find(auth()->user()->id)->profile_photo_url : asset(auth()->user()->profile_photo_path) }}" alt="" style="width: 40px; height: 40px;">
                 <span class="d-none d-lg-inline-flex">{{Auth::user()->name}}</span>
             </a>
-            <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                <a href="#" class="dropdown-item">My Profile</a>
-                <a href="#" class="dropdown-item">Settings</a>
-                {{-- <a href="#" class="dropdown-item">Log Out</a> --}}
+            <div class="dropdown-menu dropdown-menu-end bg-light border-1 rounded-2 rounded-bottom m-0">
+                {{-- <a href="{{route('users.userInfo')}}" class="dropdown-item">Mi Perfil</a> --}}
 
                 <a class="dropdown-item" href="{{ route('logout') }}"
                    onclick="event.preventDefault();

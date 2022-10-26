@@ -17,6 +17,7 @@ class CreateCarrerasTable extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('clave');
+            $table->unsignedBigInteger('wrapperID'); //agrupacion de todas las claves por 1 carrera
             $table->timestamps();
         });
     }

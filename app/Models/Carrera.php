@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Carrera extends Model
 {
     use HasFactory;
+
+    protected $table = 'carreras';
+
+
+    // public function users()
+    //  {
+    //     return $this->hasMany(User::class);
+    //  }
 }

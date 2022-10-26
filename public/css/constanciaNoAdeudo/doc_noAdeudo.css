@@ -1,0 +1,96 @@
+body{
+    padding: 10px;
+    /* min-width: 900px; */
+    /* max-width: 950px; */
+}
+
+
+.header{
+    color: lightblue;
+    margin-bottom: 50px;
+}
+
+.udgLogo{
+    width: 100px;
+    height: 120px;
+}
+
+.udg_header{
+    margin-top: 220px;
+    margin-bottom: 220px;
+    font-size: 20px;
+    font-weight: bold;
+    color: blue;
+}
+
+.udg_subheder{
+    font-size: 15px;
+    color: blue;
+}
+
+
+.student_data{
+    text-align: right;
+    margin-left: auto;
+    width: 300px;
+}
+
+.cod_ref_num{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.announcement_container{
+    /* margin-top: 50px; */
+    /* margin-left: 50px; */
+}
+
+.a_quien_corresponda{
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.por_medio_del_presente{
+    font-size: 16px;
+    text-align: justify;
+    margin-bottom: 15px;
+}
+
+.se_extiende_la_presente{
+    font-size: 18px;
+    margin-bottom: 30px;
+}
+
+.piensa_y_trabaja{
+    margin-top: -20px;
+}
+
+.ce{
+    text-align: center;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.anio_gdl_fecha{
+    inline-size: 380px;
+    overflow-wrap: break-word;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.att_coordinador{
+    margin: 0 auto;
+    margin-top: 50px;
+    inline-size: 400px;
+    overflow-wrap: break-word;
+}
+
+.firmaImg{
+    width: 80px;
+    height: 25px;
+    /* text-align: center; */
+}
+
+.footer_direccion{
+    color:blue;
+}

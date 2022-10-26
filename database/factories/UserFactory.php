@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\Team;
 use App\Models\User;
+use App\Models\Carrera;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
 use Laravel\Jetstream\Features;
@@ -26,18 +27,23 @@ class UserFactory extends Factory
      */
     public function definition()
     {
+        $isStudent = $this->faker->boolean();
+        $random_id = $this->faker->numberBetween(1,160);
+        $career = Carrera::find($random_id);
+
         return [
 
-            'role' => 'student',
+            'role' => 'none',
             'name' => $this->faker->name(),
             'apellidos' => $this->faker->lastName(),
             'email' => $this->faker->unique()->safeEmail(),
             'telefono' => $this->faker->phoneNumber,
-            'carrera_id' => 2,
-            'clave_carrera' => 'COP - Licenciatura en Comunicación Pública',
+            // 'clave_carrera' => ($isStudent)  ? 'ANT' : null,
+            // 'nombre_carrera' => ($isStudent) ? 'Licenciatura en Antropología' : null,
+            'clave_carrera' => ($isStudent)  ? $career->clave : null,
+            'nombre_carrera' => ($isStudent) ? $career->nombre : null,
             'ciclo_admision' => '2022B',
-            'codigo' => $this->faker->unique()->randomNumber($nbDigits = 9, $strict = true),
-            // 'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
+            'codigo' => $this->faker->unique()->randomNumber( ($isStudent) ? 9 : 7 , $strict = true),
             'password' => Hash::make('123'),
             'remember_token' => Str::random(10),
             'email_verified_at' => now(),
