@@ -20,6 +20,9 @@ use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 use App\Notifications\TramiteProcesado;
 
+// Mail
+use App\Mail\NewTramiteEstatus;
+use Illuminate\Support\Facades\Mail;
 
 class TramiteController extends Controller
 {
@@ -30,14 +33,9 @@ class TramiteController extends Controller
      */
 
     // SEND EMAILS //
-         public function sendEmail_newEstatus()
+         public function sendEmail_newEstatus($email, $tramite)
          {
-
-         }
-
-         public function sendEmail_registerErrors()
-         {
-
+            Mail::to($email)->send(new NewTramiteEstatus( $tramite ));
          }
      // END SEND EMAILS //
 
@@ -441,6 +439,8 @@ class TramiteController extends Controller
             $tramite->ultima_matricula_pagada = $request->input('ultimo_pago');
         }
         $tramite->update();
+
+        $this->sendEmail_newEstatus($tramite->student->email , $tramite);
 
         $log = new Log();
         $log->user_id = auth()->user()->id;
