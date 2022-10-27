@@ -13,7 +13,7 @@
     <div class="bg-light container-fluid my-3 p-4">
         <div class="text-center rounded pb-3">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h4 class="mb-0 text-secondary fw-bold">Tramites disponibles</h4>
+                <h4 class="mb-0 text-secondary fw-bold">Trámites disponibles</h4>
                 <a id="btnCreateTramite" onclick="createTramite()" data-bs-toggle="modal" href="#ModalTramiteForm" >Crear nuevo tipo de trámite</a>
             </div>
         </div>
@@ -58,7 +58,9 @@
 
                             <div class="row mt-2 mb-4">
                                 <div class="col-md-8 mx-auto">
-                                    <div class="form-check form-switch d-flex justify-content-center">
+                                    <p class="small text-secondary text-center">Permite <span class="fw-bold">activar o desactivar</span> el trámite para los estudiantes. </p>
+
+                                    <div class="form-check form-switch d-flex justify-content-center me-5">
                                         <input class="form-check-input mx-1 mt-1" name="isAvailable" value="Si" type="checkbox" role="switch" id="isAvailable" onchange="change_available(this)">
                                         <label class="form-check-label" for="isAvailable">
                                             <p class="fs-5 text-success fw-bold" id="label_IsAvailable">Disponible</p>
@@ -106,21 +108,6 @@
                                         </div>
                                     </div>
 
-                                    {{-- Select movilidad --}}
-                                    {{-- <div class="row my-1">
-                                        <div class="col-md-8 mb-4">
-                                            <div class="form-floating mb-3">
-                                                <select class="form-select" name="modalidad" id="modalidad" aria-label="Floating label select example">
-                                                    <option selected value="-">-</option>
-                                                    <option value="Virtual">Virtual</option>
-                                                    <option value="Presencial">Presencial</option>
-                                                    <option value="Ambos">Ambos</option>
-                                                </select>
-                                                <label for="floatingSelect">Seleccione modalidad</label>
-                                            </div>
-                                        </div>
-                                    </div> --}}
-
                                         {{-- Aviso --}}
                                     <div class="row mb-3">
                                         <div class="col-md-12">
@@ -142,9 +129,7 @@
                                         <table class="table table-bordered" id="reqsTable">
                                             <thead>
                                                 <tr>
-                                                    {{-- <th scope="col">#</th> --}}
                                                     <th scope="col">Nombre</th>
-                                                    {{-- <th scope="col">Modalidad</th> --}}
                                                     <th scope="col">Acciones</th>
                                                 </tr>
                                             </thead>
@@ -159,6 +144,13 @@
                                 </div>
                                 </div>
                             </div>
+
+                            <div class="row mt-3">
+                                <div class="col-md-8 mx-auto">
+                                    <p class="text-secondary"><span class="fw-bold">Atención: </span> Si desea crear un nuevo trámite, este tendrá la misma movilidad que los primeros trámites: certificados de estudio, de graduado, actas, etc. Generando una orden de pago inmediatamente!</p>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
 

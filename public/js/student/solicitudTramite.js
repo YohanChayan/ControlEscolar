@@ -66,7 +66,7 @@ function check_trNumbers()
                 if(answer >= 2){
                     Swal.fire({
                       title: '¿Estas seguro?',
-                      text: `Usted ya posee ${answer} trámites solicitados, ¿esta seguro que desea continuar?`,
+                      text: `Usted ya posee ${answer} trámites solicitados, ¿Seguro que desea continuar? los siguientes generados se les cargará a su próxima orden de pago`,
                       icon: 'warning',
                       showCancelButton: true,
                       confirmButtonColor: '#3085d6',

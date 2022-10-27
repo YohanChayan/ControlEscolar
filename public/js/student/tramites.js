@@ -41,13 +41,18 @@ function preview(tramite)
     document.querySelector('#name').value = tramite.student.name;
     document.querySelector('#apellidos').value = tramite.student.apellidos;
     document.querySelector('#estatus').value = tramite.estatus;
+    document.querySelector('#carrera').value = tramite.student.clave_carrera + ' - ' + tramite.student.nombre_carrera ;
+    document.querySelector('#ciclo').value = tramite.student.ciclo_admision ;
 
-    if(tramite.files){
-        const docsEstatus = document.querySelector('#docsEstatus');
-        docsEstatus.classList.remove('text-danger');
-        docsEstatus.classList.add('text-success');
-        docsEstatus.innerText = 'Entregados';
-    }
+
+
+    // upload files: no usado
+    // if(tramite.files){
+    //     const docsEstatus = document.querySelector('#docsEstatus');
+    //     docsEstatus.classList.remove('text-danger');
+    //     docsEstatus.classList.add('text-success');
+    //     docsEstatus.innerText = 'Entregados';
+    // }
 
     const containerEstatus = document.querySelector('#estatusContainer');
     const containerMotivo = document.querySelector('#motivoContainer');
@@ -66,24 +71,28 @@ function preview(tramite)
         containerMotivo.classList.add('d-none');
     }
 
-    const filesInputContainer = document.querySelector('#filesContainer');
-
-    if(tramite.tramite.modalidad != 'Presencial'){ //upload files
-        filesInputContainer.classList.remove('d-none');
-        document.querySelector('#documents').required = true;
-    }else {
-        filesInputContainer.classList.add('d-none');
-        document.querySelector('#documents').required = false;
-    }
-
-    loadVirtualRequirements(tramite.tramite.requerimientos)
+    // No usado
+//     const filesInputContainer = document.querySelector('#filesContainer');
+//
+//     if(tramite.tramite.modalidad != 'Presencial'){ //upload files
+//         filesInputContainer.classList.remove('d-none');
+//         document.querySelector('#documents').required = true;
+//     }else {
+//         filesInputContainer.classList.add('d-none');
+//         document.querySelector('#documents').required = false;
+//     }
+//
+//     loadVirtualRequirements(tramite.tramite.requerimientos)
 
 
     if(tramite.requerimientos_asignados){
-        const presencialReqs = tramite.requerimientos_asignados.split('|').filter(re => re.charAt(0) !== '_' );
+        const presencialReqs = tramite.requerimientos_asignados.split('|');
         loadPresencialRequirements(presencialReqs);
-    }else
-        loadPresencialRequirements(['En espera']);
+    }else{
+        const presencialReqs = tramite.tramite.requerimientos.split('|');
+        loadPresencialRequirements(presencialReqs);
+        // loadPresencialRequirements(['En espera']);
+    }
 
     $('#tramitePreviewModal').modal('show');
 }
@@ -184,8 +193,22 @@ function uploadDocuments()
     });
 }
 
+function OrdenDePago(id)
+{
+    const tID = document.querySelector('#tr_id');
+    tID.value = id;
+    document.querySelector('#form_ordenPago').submit();
 
-// get_docAdeudo(id)
-// {
+//     $.ajax({
+//        url: 'estudiante/tramites/formato',
+//        type: 'POST',
+//        data: {
+//             _token: $("meta[name='csrf-token']").attr("content"),
+//             tr_id: id
 //
-// }
+//        },
+//        success: function(answer){
+//             html2pdf(answer);
+//        }
+//     });
+}

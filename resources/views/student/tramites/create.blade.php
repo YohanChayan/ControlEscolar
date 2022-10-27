@@ -125,7 +125,7 @@
                 <div class="bg-light rounded h-100 p-4">
                     <p class="fw-bold fs-3 text-center mb-1">Importante </p>
                     <p class="mb-4 text-center text-secondary fs-5">
-                        Algunos requerimientos no son necesarios para ciertos estudiantes, esto lo podrá ver en el <span class="fw-bold">apartado de detalles </span> una vez solicitado su trámite.
+                        Algunos requerimientos no son necesarios para ciertos estudiantes, esto lo podrá ver en el apartado de<span class="fw-bold"> detalles </span> una vez solicitado su trámite.
                     </p>
 
                     <h3 class="mt-3 text-center text-secondary fw-bold">Listado de trámites</h3>

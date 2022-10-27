@@ -1,4 +1,8 @@
 <style type="text/css">
+    .my_bg-light{
+        background-color: rgb(244,246,249);
+    }
+
     #outlook a {
         padding: 0;
     }
@@ -111,19 +115,10 @@
 
         <div style="background:#fff;background-color:#fff;Margin:0px auto;max-width:600px;">
 
-            <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#fff;background-color:#fff;width:100%;">
+            <table align="center" border="0" cellpadding="0" cellspacing="0" role="presentation" style="background:#fff;background-color: rgb(244,246,249);width:100%;">
                 <tbody>
                     <tr>
                         <td style="border:#dddddd solid 1px;border-top:0px;direction:ltr;font-size:0px;padding:20px 0;text-align:center;vertical-align:top;">
-                            <!--[if mso | IE]>
-                  <table role="presentation" border="0" cellpadding="0" cellspacing="0">
-
-        <tr>
-
-            <td
-               style="vertical-align:bottom;width:600px;"
-            >
-          <![endif]-->
 
                             <div class="mj-column-per-100 outlook-group-fix" style="font-size:13px;text-align:left;direction:ltr;display:inline-block;vertical-align:bottom;width:100%;">
 
@@ -165,7 +160,7 @@
                                         <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
 
                                             <div style="font-family:'Helvetica Neue',Arial,sans-serif;font-size:20px;line-height:22px;text-align:left;color:#555;">
-                                                Se ha otorgado un <strong style="color: #0275d8;">estatus</strong> a su trámite de folio <strong style="color: #0275d8;" >{{$tr_id}}</strong>: <strong style="margin-top:5px; display: block; text-align:center; color: #0275d8;">{{$tr_nombre_tramite}}</strong><br>
+                                                Se ha otorgado un <strong style="color: #332D2D;">estatus</strong> a su trámite de folio <strong style="color: #332D2D;" >{{$tr_id}}</strong>: <strong style="margin-top:5px; display: block; text-align:center; color: #332D2D;">{{$tr_nombre_tramite}}</strong><br>
                                             </div>
 
                                         </td>

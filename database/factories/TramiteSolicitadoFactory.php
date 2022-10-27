@@ -18,7 +18,7 @@ class TramiteSolicitadoFactory extends Factory
         $tramite_id = $this->faker->numberBetween($min = 1, $max = 5);
         $reqs_assign = Tramite::find($tramite_id)->first()->requerimientos;
 
-        $isStudent = $this->faker->numberBetween($min = 1, $max = 20);
+        $isStudent = $this->faker->numberBetween($min = 1, $max = 2000);
         $student = User::where('id', $isStudent )->whereRaw('LENGTH(codigo) > 7')->first();
         $randomEstatus = $this->faker->numberBetween($min = 1, $max = 4); //1:Pendiente, 2: Finalizado, 3: Archivado, 4: Rechazado.
         $categoria = 'solicitido';

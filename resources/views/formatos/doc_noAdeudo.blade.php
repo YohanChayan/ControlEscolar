@@ -48,7 +48,7 @@
         </div>
 
         {{-- <p class="firma" style="margin: 0; text-align:center;">OLGZ/pbp</p> --}}
-        <div style="text-align:center; margin-top: -20px;">
+        <div style="margin-top: -20px;">
             <img class="firmaImg" src="{{asset('custom/formatos_assets/firma_olga.png')}}" alt="firma Olga">
          </div>
 

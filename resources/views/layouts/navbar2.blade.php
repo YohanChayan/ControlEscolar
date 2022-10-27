@@ -8,7 +8,7 @@
     @canany(['coordinador', 'admin'])
     <form action="{{route('tramites.seguimiento')}}" class="d-none d-md-flex ms-4" method="post">
         @csrf
-        <input class="form-control border-0" id="tramite_id" name="tramite_id" type="text" placeholder="Buscar">
+        <input class="form-control border-0" id="tramite_id" name="tramite_id" type="text" placeholder="Buscar folio">
     </form>
     @endcanany
 

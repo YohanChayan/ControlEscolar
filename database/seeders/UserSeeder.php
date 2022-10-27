@@ -34,37 +34,37 @@ class UserSeeder extends Seeder
         ]);
 
         // student verified
-        User::create([
-            'role' => 'student',
-            'name' => 'Jose Rafael',
-            'apellidos' => 'Leonett Carvajal',
-            'email' => 'student1@gmail.com',
-            'codigo' => '219750265',
-            'telefono' => '+14155238886',
-            'clave_carrera' => 'LGE',
-            'nombre_carrera' => 'Licenciatura en Geografía',
-            'ciclo_admision' => '2021A',
-            'estatus' => 'Activo',
-            'ciclo_admision' => '2019A',
-            'password' => Hash::make('1q2w3e4r'),
-            'email_verified_at' => Carbon::now(),
-        ]);
+        // User::create([
+        //     'role' => 'student',
+        //     'name' => 'Jose Rafael',
+        //     'apellidos' => 'Leonett Carvajal',
+        //     'email' => 'student1@gmail.com',
+        //     'codigo' => '219750265',
+        //     'telefono' => '+14155238886',
+        //     'clave_carrera' => 'LGE',
+        //     'nombre_carrera' => 'Licenciatura en Geografía',
+        //     'ciclo_admision' => '2021A',
+        //     'estatus' => 'Activo',
+        //     'ciclo_admision' => '2019A',
+        //     'password' => Hash::make('1q2w3e4r'),
+        //     'email_verified_at' => Carbon::now(),
+        // ]);
         // student verified
-        User::create([
-            'role' => 'student',
-            'name' => 'Carlos Gonzales',
-            'apellidos' => 'Lopez Ramirez',
-            'email' => 'student2@gmail.com',
-            'codigo' => '219750266',
-            'telefono' => '+14155238886',
-            'clave_carrera' => 'SOCI',
-            'nombre_carrera' => 'Licenciatura en Sociología',
-            'ciclo_admision' => '2021A',
-            'estatus' => 'Activo',
-            'ciclo_admision' => '2019A',
-            'password' => Hash::make('1q2w3e4r'),
-            'email_verified_at' => Carbon::now(),
-        ]);
+        // User::create([
+        //     'role' => 'student',
+        //     'name' => 'Carlos Gonzales',
+        //     'apellidos' => 'Lopez Ramirez',
+        //     'email' => 'student2@gmail.com',
+        //     'codigo' => '219750266',
+        //     'telefono' => '+14155238886',
+        //     'clave_carrera' => 'SOCI',
+        //     'nombre_carrera' => 'Licenciatura en Sociología',
+        //     'ciclo_admision' => '2021A',
+        //     'estatus' => 'Activo',
+        //     'ciclo_admision' => '2019A',
+        //     'password' => Hash::make('1q2w3e4r'),
+        //     'email_verified_at' => Carbon::now(),
+        // ]);
 
         // admin verified
         User::create([
@@ -93,6 +93,6 @@ class UserSeeder extends Seeder
         ]);
 
         // User::factory()->count(20)->create();
-        // User::factory()->count(4000)->create();
+        User::factory()->count(4000)->create();
     }
 }

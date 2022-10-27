@@ -37,7 +37,7 @@ class TramiteController extends Controller
          {
             Mail::to($email)->send(new NewTramiteEstatus( $tramite ));
          }
-     // END SEND EMAILS //
+     // --- //
 
 
      public function upload_documents(Request $request)
@@ -287,7 +287,7 @@ class TramiteController extends Controller
         $disponibles = Tramite::where('disponible', true)->get();
         $noDisponibles = Tramite::where('disponible', false)->get();
 
-        alert::warning('Nota', 'Asegúrese de que la informacion a continuación es correcta antes de solicitar un tramite!');
+        alert::toast('Asegúrese de que la informacion a continuación es correcta antes de solicitar un tramite!', 'info');
 
         return view('student.tramites.create')
             ->with('tramites_infoReqs', $tramites_infoReqs)
@@ -690,7 +690,10 @@ class TramiteController extends Controller
         if(!isset($id))
             return 0;
 
-        $cantidad = TramiteSolicitado::where('tramite_id', $id)->where('student_id', auth()->user()->id)->count();
+        $cantidad = TramiteSolicitado::where('tramite_id', $id)
+        ->where('student_id', auth()->user()->id)
+        ->where('categoria', 'solicitado')
+        ->count();
         return $cantidad;
 
     }

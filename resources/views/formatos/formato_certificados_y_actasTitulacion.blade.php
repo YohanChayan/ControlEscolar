@@ -9,8 +9,10 @@
 
     <link rel="stylesheet" href="{{asset('css/certificados_actas/styles.css')}}">
 
-
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+    <script src="https://code.jquery.com/jquery-3.6.1.js" integrity="sha256-3zlB5s2uwoUzrXK3BT7AX3FyvojsraNFxCc2vC/7pNI=" crossorigin="anonymous"></script>
+
 
 </head>
 <body>
@@ -22,7 +24,7 @@
             <div class="section1">
 
                 <div class="container_logoUdg">
-                    <img class="logoUdg" src="{{asset('custom/formatos_assets/udg.png')}}" alt="Udg logo">
+                    <img class="logoUdg" src="{{asset('custom/formatos_assets/udg.png')}}" alt="Udg logo" style="height: 90px;">
                 </div>
 
                 <div class="container_logoCucsh">
@@ -146,15 +148,20 @@
             <p class="enVentanilla">EN VENTANILLA 4</p>
             <p class="axenar">ANEXA EL COMPROBANTE DE PAGO DEL BANCO, ADEMÁS:</p>
             <ul class="personal_requirements">
-            @foreach($data['tr_requerimientos'] as $req)
-                <li>
-                    @if($req[0] == '_')
-                        (Virtual) {{  substr($req, 1)   }}
-                    @else
-                        {{$req}}
-                    @endif
-                </li>
-            @endforeach
+
+            @if( ($data['tr_requerimientos'][0] == ''))
+                <li>En espera</li>
+            @else
+                @foreach($data['tr_requerimientos'] as $req)
+                    <li>
+                        @if($req[0] == '_')
+                            (Virtual) {{  substr($req, 1)   }}
+                        @else
+                            {{$req}}
+                        @endif
+                    </li>
+                @endforeach
+            @endif
             </ul>
         </div>
 
@@ -187,7 +194,7 @@
         <div class="square2">
             <div class="square2_section1">
                 <div class="container_logoUdg2">
-                    <img class="logoUdg2" src="{{asset('custom/formatos_assets/udg.png')}}" alt="Udg logo" width="100" height="100">
+                    <img class="logoUdg2" src="{{asset('custom/formatos_assets/udg.png')}}" alt="Udg logo" width="100" height="100" style="width: 100%; margin-top: 10px; margin-left: 15px;">
                 </div>
 
                 <div class="MainTitle">
@@ -196,7 +203,7 @@
                 </div>
 
                 <div class="container_logoCucsh2">
-                    <img class="logoCucsh2" src="{{asset('custom/formatos_assets/cucsh.png')}}" alt="Cucsh logo" width="100" height="100">
+                    <img class="logoCucsh2" src="{{asset('custom/formatos_assets/cucsh.png')}}" alt="Cucsh logo" width="100" height="100" style="margin-top: 15px;">
                 </div>
             </div>
 
@@ -206,28 +213,28 @@
 
             <div class="square2_section2">
                 <!-- ?? -->
-                <h4 style="font-style: italic;"> Vale por 1 Certificado Total de Estudios </h4>
+                <h4 style="font-style: italic;"> Vale por 1 {{$data['tr_nombre_tramite']}} </h4>
 
                 <div class="form_info" style="width: 50%; margin: 25px auto; text-align: center; ">
                     <div class="form_item">
                         <p class="label">Código: </p>
-                        <p class="student_value" > _______________ </p>
+                        <p class="student_value" > {{$data['usr_codigo']}} </p>
                     </div>
 
                     <div class="form_item">
                         <p class="label">Nombre: </p>
-                        <p class="student_value"> _______________ </p>
+                        <p class="student_value"> {{$data['usr_apellidos']}} {{$data['usr_nombres']}} </p>
                     </div>
 
                     <div class="form_item">
                         <p class="label">Clave de carrera: </p>
-                        <p class="student_value"> _______________ </p>
+                        <p class="student_value"> {{$data['usr_clave_carrera']}} </p>
                     </div>
 
-                    <div class="form_item" >
+                    <div class="form_item" style="width: 400px;">
                         <p class="label">Fecha de solicitud: </p>
-                        <p class="student_value" id="student_telefono"> ___________ </p>
-                        <p class="label">Recibió: </p>
+                        <p class="student_value" id="student_fechaSolicitud"> {{$data['usr_created_at']}} </p>
+                        <p class="label" style="margin-left: 20px;">Recibió: </p>
                         <p class="student_value" id="student_email"> ____________ </p>
                     </div>
 
@@ -237,10 +244,14 @@
                      </h3>
             </div>
         </div>
-
         <div class="side_miniSquare">
             <p class="side_text"> C O M P R O B A N T E </p>
             <p class="side_text">  A L U M N O </p>
+        </div>
+
+        <div class="qr_and_folioNumber" style="margin-left: 20px; margin-top: 50px;">
+            {{QrCode::size(120)->generate($data['tr_folio'])}}
+            <p style="margin: 0;">Folio: {{$data['tr_folio']}}</p>
         </div>
     </div>
     </div>
@@ -255,8 +266,6 @@
         var element = document.querySelector('.main');
         html2pdf(element);
     </script>
-
-    {{-- <script defer> window.print() </script> --}}
 
 </body>
 </html>

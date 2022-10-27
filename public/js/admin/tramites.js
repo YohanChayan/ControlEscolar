@@ -1,5 +1,4 @@
 var tramite_id = -1;
-var DT = '';
 
 function loadingDT(data){
     document.querySelector('#tramiteTbody').innerHTML = data;
@@ -19,7 +18,7 @@ function applyToolTips()
 function applyDataTable()
 {
     $(document).ready( function () {
-        DT = $('#tramiteTable').DataTable({
+        $('#tramiteTable').DataTable({
             'language':{
                 'lengthMenu': 'Mostrar _MENU_ tramites',
                 'zeroRecords': 'No exiten registros',

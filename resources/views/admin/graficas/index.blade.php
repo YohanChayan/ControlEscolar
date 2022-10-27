@@ -1,12 +1,9 @@
 @extends('layouts.app')
 
 @section('my_scripts')
-    <script src="{{asset('js/admin/myCharts.js')}}"></script>
+    <script src="{{asset('custom/dashboard/lib/chart/chart.min.js')}}"></script>
 
-    {{-- <script>
-        load_chart_TramitesMonths(@json($tramites_mes));
-        load_chart_TramitesGeneral(@json($general_total_tramites));
-    </script> --}}
+    <script src="{{asset('js/admin/myCharts.js')}}"></script>
 @endsection
 
 @section('content')

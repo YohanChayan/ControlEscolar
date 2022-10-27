@@ -17,10 +17,7 @@
 
             <div class="row my-3">
                 <div class="col-md-6 mx-auto">
-                    <div class="alert alert-warning" role="alert">
-                      <p>
-                      <span class="fw-bold">Atención: </span> para realizar el cambio de carrera es necesario que primero entregue su solicitud en control escolar, en caso de que se la hayan <span class="fw-bold">aprobado y cambiado</span>, posterior deberá llenar este formulario.
-                      </p>
+                    <div class="alert alert-dark" role="alert">
                       <p class="mb-1"> <span class="fw-bold">Nota:</span> Una vez llenado este formulario de cambio de carrera deberá esperar a que control escolar valide su solicitud.</p>
                     </div>
                 </div>

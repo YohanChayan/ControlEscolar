@@ -158,7 +158,5 @@
         var element = document.querySelector('.main');
         html2pdf(element);
     </script>
-
-    {{-- <script defer> window.print() </script> --}}
 </body>
 </html>

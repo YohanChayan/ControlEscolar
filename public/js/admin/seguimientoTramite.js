@@ -37,8 +37,10 @@ function submitSeguimiento()
     }
     selected_reqs.value = selected_reqs.value.slice(0, -1);
 
-    if(!validateAssignedReqs())
-        return;
+    if(estatus.value !== 'Recibido')
+        if(!validateAssignedReqs())
+            return;
+
 
 
 

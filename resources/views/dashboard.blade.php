@@ -89,7 +89,6 @@
     @endsection
 @endcan
 
-
 @can('student')
 
 @section('my_scripts')
@@ -202,6 +201,8 @@
                             <a href="{{route('logs.index')}}">Mostrar todos</a>
                         </div>
 
+
+                        {{-- Solo 4 --}}
                         @foreach($logs_admins as $la)
                             <div class="d-flex align-items-center border-bottom py-3">
                                 <img class="rounded-circle flex-shrink-0" src="{{asset('custom/dashboard/img/user-icon.png')}}" alt="" style="width: 40px; height: 40px;">
@@ -223,7 +224,7 @@
                             <h5 class="mb-0 text-secondary text-center">Actividades Estudiantes</h5>
                             <a href="{{route('logs.index_students')}}">Mostrar todos</a>
                         </div>
-
+                        {{-- Solo 4 --}}
                         @foreach($logs_students as $ls)
 
                             <div class="d-flex align-items-center border-bottom py-3">
@@ -251,8 +252,7 @@
     <div class="bg-light container-fluid my-3 p-4">
         <div class="text-center rounded ">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h5 class="mb-0">Tramites solicitados</h5>
-                {{-- <a href="#">Mostrar todos</a> --}}
+                <h5 class="mb-0 text-secondary fs-3">Trámites solicitados</h5>
             </div>
         </div>
 
@@ -275,9 +275,11 @@
                                     <td> {{  date("d M Y", strtotime($tr->created_at)) }} </td>
                                     <td>
                                         @if($tr->estatus == 'Recibido')
-                                            <span class="text-success">Finalizado</span>
+                                            <span class="text-success fw-bold">Finalizado</span>
                                         @elseif($tr->estatus == 'Recepción de trámite rechazado en CE' || $tr->estatus == 'Retención')
                                             <span class="text-danger">{{$tr->estatus}}</span>
+                                        @elseif($tr->estatus == '-')
+                                            <span class="text-primary">Iniciado</span>
                                         @else
                                             <span class="text-primary">{{$tr->estatus}}</span>
                                         @endif
@@ -295,9 +297,9 @@
 
                                             @if($tr->tramite->formato !== 'formato_constanciaNoAdeudo')
 
-                                                @if($tr->categoria !== 'finalizado')
+                                                @if($tr->categoria !== 'finalizado' && $tr->categoria !== 'rechazado')
                                                     <div class="col-md-4">
-                                                        <a onclick="document.querySelector('#tr_id').value = @json($tr->id); document.querySelector('#form_ordenPago').submit()" class="text-secondary" style="cursor: pointer;" >
+                                                        <a onclick="OrdenDePago({{$tr->id}})" class="text-secondary" style="cursor: pointer;" >
                                                             <span data-bs-toggle="tooltip" data-bs-placement="top" title="Orden de pago">
                                                                 <i class="far fa-file-alt me-2"></i>
                                                              </span>
@@ -306,10 +308,10 @@
                                                 @endif
 
                                             @else
-                                                @if($tr->categoria !== 'finalizado')
+                                                @if($tr->categoria !== 'finalizado' && $tr->categoria !== 'rechazado')
                                                     @if($tr->estatus === 'Retención' && $tr->total_a_pagar > 0)
                                                         <div class="col-md-4">
-                                                            <a onclick="document.querySelector('#tr_id').value= @json($tr->id); document.querySelector('#form_ordenPago').submit()" class="text-secondary" style="cursor: pointer;" >
+                                                            <a onclick="OrdenDePago({{$tr->id}})" class="text-secondary" style="cursor: pointer;" >
                                                                 <span data-bs-toggle="tooltip" data-bs-placement="top" title="Orden de pago">
                                                                     <i class="far fa-file-alt me-2"></i>
                                                                  </span>
@@ -328,49 +330,6 @@
                                                     @endif
                                                 @endif
                                             @endif
-
-
-
-                                            {{-- @if($tr->tramite->formato !== 'formato_constanciaNoAdeudo')
-                                                <div class="col-md-4">
-                                                    <form action="{{route('tramites.formato')}}" method="POST" id="form_ordenPago">
-                                                        @csrf
-                                                        <input type="hidden" name="tr_id" value="{{$tr->id}}">
-                                                    </form>
-
-                                                    <a onclick="document.querySelector('#form_ordenPago').submit()" class="text-secondary" style="cursor: pointer;" >
-                                                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Orden de pago">
-                                                            <i class="far fa-file-alt me-2"></i>
-                                                         </span>
-                                                    </a>
-                                                </div>
-                                            @else
-                                                @if( $tr->estatus == 'Retención' && $tr->total_a_pagar > 0)
-
-                                                    <form action="{{route('tramites.formato')}}" method="POST" id="form_ordenPago">
-                                                        @csrf
-                                                        <input type="hidden" name="tr_id" value="{{$tr->id}}">
-                                                    </form>
-
-                                                        <div class="col-md-4">
-                                                            <a onclick="document.querySelector('#form_ordenPago').submit()" class="text-secondary" style="cursor: pointer;" >
-                                                                <span data-bs-toggle="tooltip" data-bs-placement="top" title="Orden de pago">
-                                                                    <i class="far fa-file-alt me-2"></i>
-                                                                 </span>
-                                                            </a>
-                                                        </div>
-                                                @elseif($tr->estatus !== 'Recibido')
-                                                    <div class="col-md-4">
-                                                        <a href="#" class="text-secondary" style="cursor: pointer;" >
-                                                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Orden de pago en proceso">
-                                                                <small>En proceso</small>
-                                                             </span>
-                                                        </a>
-                                                    </div>
-                                                    @endif
-                                            @endif --}}
-
-
                                         </div>
                                     </td>
                                 </tr>
@@ -400,7 +359,7 @@
 
                         <input type="hidden" name="folioUnico" id="folioUnico">
 
-                        <div class="row mb-4 p-1">
+                        <div class="row mb-3">
                             <div class="col-md-6 mx-auto mx-4 text-center" id="estatusContainer">
                                 <label for="estatus" class="col-form-label text-success"><span class="fs-5 fw-bold">Estatus</span></label>
                                 <textarea class="form-control" name="estatus" id="estatus" aria-describedby="estatusHelp" readonly style="height: 75px;"></textarea>
@@ -442,7 +401,20 @@
                             </div>
                         </div>
 
-                        <div class="row g-3" id="filesContainer">
+                        <div class="row justify-content-center">
+                            <div class="col-md-8">
+                                <label for="carrera" class="form-label">Carrera</label>
+                                <input type="text" class="form-control" name="carrera" id="carrera" aria-describedby="emailHelp" readonly>
+                            </div>
+
+                            <div class="col-md-3">
+                                <label for="ciclo" class="form-label">Ciclo de admisión</label>
+                                <input type="text" class="form-control" name="ciclo" id="ciclo" aria-describedby="emailHelp" readonly>
+                            </div>
+                        </div>
+
+                        {{-- No se usará --}}
+                        {{-- <div class="row g-3" id="filesContainer">
                             <div class="mb-3 col-md-6">
                                 <label for="documents" class="form-label">Archivos</label>
                                 <input type="file" class="form-control" name="documents[]" id="documents" multiple accept="application/pdf">
@@ -461,9 +433,9 @@
                                     <span class="text-danger" id="docsEstatus"> Por entregar </span>
                                 </span>
                             </div>
-                        </div>
+                        </div> --}}
 
-                        <div class="row mt-3" id="container_list_requirements_presencial">
+                        <div class="row mt-2" id="container_list_requirements_presencial">
                             <div class="col-md-7 mx-auto border border-2">
                                 <p class="text-center fw-bold mb-1"> Entrega presencial </p>
                                 <span class="text-secondary text-center">Los siguientes requerimientos deben ser entregados de <span class="fw-bold">forma presencial</span>: </span>
@@ -473,7 +445,14 @@
                             </div>
                         </div>
 
-                        {{-- <button type="submit" class="btn btn-success">Solicitar</button> --}}
+                        <div class="row mt-3 gx-3 justify-content-center">
+                            <div class="col-md-6 border">
+                                <p class="text-secondary"><span class="fw-bold">Recuerde</span> que una vez que se le da seguimiento a su trámite, dichos requerimientos pueden variar dependiendo del estudiante.</p>
+                            </div>
+                            <div class="col-md-6 border">
+                                <p class="text-secondary my-1">En caso de que su trámite se encuentre en estatus: <span class="fw-bold">Listo para entrega</span> debe dirigirse a control escolar con la referencia de su trámite. </p>
+                            </div>
+                        </div>
                 </form>
                 </div>
 

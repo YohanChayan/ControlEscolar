@@ -116,13 +116,12 @@ Route::group(['middleware' => ['auth']], function(){
 
                     Route::post('/cambioCarrera', [UserController::class, 'cambio_carrera'])->name('users.cambioCarrera');
 
+                    Route::post('tramites/formato', [TramiteController::class, 'formato'])->name('tramites.formato');
             });
-                Route::post('tramites/formato', [TramiteController::class, 'formato'])->name('tramites.formato');
 
+                // Errores de registro
                 Route::post('/filter_careers', [UserController::class, 'filter_careers'])->name('users.filter_careers');
-
                 Route::post('/filter_ciclos', [UserController::class, 'filter_ciclos'])->name('users.filter_ciclos');
-
                 Route::post('/fixStudentData', [UserController::class, 'fix_data_errors'])->name('users.fixStudentData');
 
     });

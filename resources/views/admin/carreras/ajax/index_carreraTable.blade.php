@@ -15,7 +15,7 @@
             {{$c->claves}}
          </td>
         <td>
-            <div class="d-flex justify-content-between align-items-center">
+            <div class="d-flex justify-content-evenly align-items-center">
                 <div class="col-md-4">
                     <a onclick="editCareer({{$c->wrapperID}})" class="text-primary" style="cursor: pointer;">
                         <span data-bs-toggle="tooltip" data-bs-placement="top" title="Editar Carrera">
@@ -24,13 +24,15 @@
                     </a>
                 </div>
 
-                <div class="col-md-4">
-                    <a onclick="removeCareer({{$c->wrapperID}})"  class="text-danger" style="cursor: pointer;">
-                        <span data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar Carrera">
-                            <i class="fas fa-trash mx-2"> </i>
-                         </span>
-                    </a>
-                </div>
+                @if($c->wrapperID > 84)
+                    <div class="col-md-4">
+                        <a onclick="removeCareer({{$c->wrapperID}})"  class="text-danger" style="cursor: pointer;">
+                            <span data-bs-toggle="tooltip" data-bs-placement="top" title="Eliminar Carrera">
+                                <i class="fas fa-trash mx-2"> </i>
+                             </span>
+                        </a>
+                    </div>
+                @endif
             </div>
         </td>
     </tr>

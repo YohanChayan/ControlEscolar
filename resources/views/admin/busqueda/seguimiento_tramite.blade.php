@@ -181,7 +181,11 @@
 
                         <div class="col-md-5">
                             <div class="alert alert-secondary" role="alert">
-                              Al seleccionar la opción de <span class="fw-bold">No posee Adeudo</span>, el tramite automáticamente se finaliza, enviándole al estudiante su constancia de no adeudo en formato PDF.
+                              Al seleccionar la opción de <span class="fw-bold">No posee Adeudo</span>, el trámite pasará a: <span class="fw-bold">Listo para entrega</span>
+
+                              <p class="mt-4">
+                                <span class="fw-bold">Recuerde descargar la constancia  </span>, esta se descargará en formato <span class="fw-bold">PDF</span> con la información del estudiante autorellenada.
+                              </p>
                             </div>
                         </div>
 
@@ -198,11 +202,11 @@
                                 @if($tramite->tramite->formato !== 'formato_constanciaNoAdeudo')
                                     <option {{ $tramite->estatus == 'Iniciado' ? 'selected': '' }}> - </option>
                                     <option {{ $tramite->estatus == 'Recepción de trámite recibido en CE' ? 'selected': '' }} value="Recepción de trámite recibido en CE"> Recepción de trámite recibido en CE </option>
-                                    <option {{ $tramite->estatus == 'Recepción de trámite rechazado en CE' ? 'selected': '' }} value="Recepción de trámite rechazado en CE"> *Recepción de trámite rechazado en CE </option>
                                     <option {{ $tramite->estatus == 'Revisión' ? 'selected': '' }} value="Revisión"> Revisión </option>
                                     <option {{ $tramite->estatus == 'Retención' ? 'selected': '' }} value="Retención"> *Retención </option>
                                     <option {{ $tramite->estatus == 'Elaboración/Impresión' ? 'selected': '' }} value="Elaboración/Impresión"> Elaboración/Impresión </option>
                                     <option {{ $tramite->estatus == 'Firmas CU/Adm. Gral.' ? 'selected': '' }} value="Firmas CU/Adm. Gral."> Firmas CU/Adm. Gral. </option>
+                                    <option {{ $tramite->estatus == 'Recepción de trámite rechazado en CE' ? 'selected': '' }} value="Recepción de trámite rechazado en CE"> *Recepción de trámite rechazado en CE </option>
                                     <option {{ $tramite->estatus == 'Listo para entrega' ? 'selected': '' }} value="Listo para entrega"> Listo para entrega </option>
                                     <option {{ $tramite->estatus == 'Recibido' ? 'selected': '' }} value="Recibido"> *Recibido </option>
                                 @else
@@ -210,9 +214,9 @@
 
                                     <option {{ $tramite->estatus == 'Recepción de trámite recibido en CE' ? 'selected': '' }} value="Recepción de trámite recibido en CE"> Recepción de trámite recibido en CE </option>
 
-                                    <option {{ $tramite->estatus == 'Recepción de trámite rechazado en CE' ? 'selected': '' }} value="Recepción de trámite rechazado en CE"> *Recepción de trámite rechazado en CE </option>
 
                                     <option {{ $tramite->estatus == 'Revisión' ? 'selected': '' }} value="Revisión"> Revisión </option>
+                                    <option {{ $tramite->estatus == 'Recepción de trámite rechazado en CE' ? 'selected': '' }} value="Recepción de trámite rechazado en CE"> *Recepción de trámite rechazado en CE </option>
                                     <option {{ $tramite->estatus == 'Retención' ? 'selected': '' }} value="Retención"> *Retención </option>
                                      <option {{ $tramite->estatus == 'Listo para entrega' ? 'selected': '' }} value="Listo para entrega"> Listo para entrega </option>
 
