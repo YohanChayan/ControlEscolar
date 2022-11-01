@@ -21,6 +21,7 @@
     </div> --}}
 
     Home blade
+    {{-- Se usa dashboard.blade --}}
 
 </div>
 @endsection

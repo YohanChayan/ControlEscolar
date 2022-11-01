@@ -1,5 +1,6 @@
 var hasToFix = '';
 
+// carga errores de registro al estudiante, al cargar la pagina
 function loadErrors()
 {
     const list_errors = document.querySelector('#list_errors_user');

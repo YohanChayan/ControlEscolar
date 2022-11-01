@@ -423,8 +423,6 @@ class TramiteController extends Controller
 
         $tramite->requerimientos_asignados = $request->input('selected_reqs');
 
-        // dd($request);
-
         if($newEstatus == 'Recibido')
             $tramite->categoria = 'finalizado';
         else if($newEstatus == 'Recepción de trámite rechazado en CE')

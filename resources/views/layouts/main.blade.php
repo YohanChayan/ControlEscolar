@@ -1,5 +1,5 @@
 <!-- Spinner Start -->
-<div class="container-fluid-xxl">
+<div class="container-fluid-xxl pepe">
 
 <div id="spinner" class="show bg-white position-fixed translate-middle w-100 vh-100 top-50 start-50 d-flex align-items-center justify-content-center">
     <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
@@ -20,18 +20,7 @@
 
     <div class="container-fluid">
         @yield('content')
-        {{-- <div class="container-fluid pt-4 px-4">
-            <div class="bg-light rounded-top p-4">
-                <div class="row">
-                    <div class="col-12 col-sm-6 text-center text-sm-start">
-                        <a href="#">Control Escolar</a>
-                    </div>
-                    <div class="col-12 col-sm-6 text-center text-sm-end">
-                        Designed By <a href="https://htmlcodex.com">HTML Codex</a>
-                    </div>
-                </div>
-            </div>
-        </div> --}}
+        {{-- container fluid in content --}}
     </div>
 
 </div>

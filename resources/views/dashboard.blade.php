@@ -1,6 +1,7 @@
 @extends('layouts.app')
 
 @can('none')
+{{-- Carga scripts para correccion de registro (student) --}}
     @if(auth()->user()->answer_dataIsWrong === 1)
         @section('my_scripts')
             <script src="{{asset('js/errors_student/errorsStudent.js')}}"></script>
@@ -14,7 +15,7 @@
     @endif
 
     @section('content')
-        <div class="m-4 container-fluid pt-4 px-4 vh-100 bg-light d-flex align-items-center">
+        <div class="m-4 container-fluid vh-100 pt-4 px-4 bg-light d-flex align-items-center">
             <div class="row rounded align-items-center justify-content-center mx-auto">
                 @if(auth()->user()->answer_dataIsWrong === 0)
                     <div class="col-md-8 mx-auto text-center p-4">
@@ -56,56 +57,42 @@
             </div>
         </div>
 
+            <!-- Modal -->
+            <div class="modal fade " id="fixErrorsModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="fixErrorsModalLabel" aria-hidden="true">
+              <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header bg-light">
+                    <h5 class="modal-title fw-bold text-secondary" id="fixErrorsModalLabel">Información</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body bg-light">
 
-        <!-- Modal -->
-        <div class="modal fade " id="fixErrorsModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="fixErrorsModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-              <div class="modal-header bg-light">
-                <h5 class="modal-title fw-bold text-secondary" id="fixErrorsModalLabel">Información</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body bg-light">
+                    <form action="{{route('users.fixStudentData')}}" method="POST" id="FixErrorsForm">
+                        @csrf
+                        <div class="row g-2" id="containerInputs">
+                            {{-- dynamic inputs --}}
+                        </div>
 
-                <form action="{{route('users.fixStudentData')}}" method="POST" id="FixErrorsForm">
-                    @csrf
-                    <div class="row g-2" id="containerInputs">
-                        {{-- dynamic inputs --}}
-                    </div>
+                    </form>
 
-                </form>
-
-              </div>
-              <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                <button onclick="submitFixErrors()" type="button"  class="btn btn-primary">Enviar</button>
+                  </div>
+                  <div class="modal-footer bg-light">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button onclick="submitFixErrors()" type="button"  class="btn btn-primary">Enviar</button>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
 
-        @endif
-
+            @endif
     @endsection
-@endcan
-
-@can('student')
-
-@section('my_scripts')
-    <script src="{{asset('js/student/tramites.js')}}"></script>
-    <script>
-        $(document).ready( function () { applyToolTips(); });
-        $(document).ready( function () { applyDataTable(); });
-    </script>
-@endsection
-
 @endcan
 
 @section('content')
 
-<div class="container-fluid">
+<div class="container-fluid vh-100 pt-4">
     <!-- Sale & Revenue Start -->
-    <div class="container-fluid pt-2 px-2">
+    {{-- <div class="container-fluid pt-2 px-2"> --}}
 
         @canany(['admin' , 'coordinador'])
 
@@ -249,6 +236,16 @@
 
     <!-- Recent Sales Start -->
     @can('student')
+
+    {{-- Carga scripts para dashboard student --}}
+    @section('my_scripts')
+        <script src="{{asset('js/student/tramites.js')}}"></script>
+        <script>
+            $(document).ready( function () { applyToolTips(); });
+            $(document).ready( function () { applyDataTable(); });
+        </script>
+    @endsection
+
     <div class="bg-light container-fluid my-3 p-4">
         <div class="text-center rounded ">
             <div class="d-flex align-items-center justify-content-between mb-4">
@@ -413,7 +410,7 @@
                             </div>
                         </div>
 
-                        {{-- No se usará --}}
+                        {{-- No se usará, POR LOS MOMENTOS --}}
                         {{-- <div class="row g-3" id="filesContainer">
                             <div class="mb-3 col-md-6">
                                 <label for="documents" class="form-label">Archivos</label>
@@ -467,4 +464,31 @@
     </div>
     @endcan
 </div>
+
+
+{{-- Footer --}}
+<div class="container p-4 bg-light">
+    <div class="row justify-content-evenly align-items-center">
+
+        <div class="col-md-5">
+            <div class="d-flex align-items-center">
+                <img src="{{asset('custom/dashboard/img/cta_logo.jpg')}}" class="img-fluid border border-2" alt="CTA">
+            </div>
+        </div>
+
+        <div class="col-md-5">
+            <h5 class="text-uppercase mb-4 font-weight-bold text-secondary">Contacto</h5>
+                <p><i class="fas fa-envelope"></i> cta.cucsh@administrativos.udg.mx</p>
+                <p><i class="fas fa-phone "></i> +52 33 3819 3300 ext: 23609</p>
+        </div>
+    </div>
+
+    <hr class="my-3">
+    <div class="p-2">
+          <p class="mb-2">Coordinación de Tecnologias para el Aprendizaje - Universidad de Guadalajara</p>
+          <small class="fst-italic">Desarrollado por: Yohan Chayan</small>
+    </div>
+
+</div>
+
 @endsection
