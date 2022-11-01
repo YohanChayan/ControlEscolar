@@ -477,7 +477,7 @@
         </div>
 
         <div class="col-md-5">
-            <h5 class="text-uppercase mb-4 font-weight-bold text-secondary">Contacto</h5>
+            <h5 class="text-uppercase my-4 font-weight-bold text-secondary">Contacto</h5>
                 <p><i class="fas fa-envelope"></i> cta.cucsh@administrativos.udg.mx</p>
                 <p><i class="fas fa-phone "></i> +52 33 3819 3300 ext: 23609</p>
         </div>
