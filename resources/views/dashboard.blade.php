@@ -15,7 +15,7 @@
     @endif
 
     @section('content')
-        <div class="m-4 container-fluid vh-100 pt-4 px-4 bg-light d-flex align-items-center">
+        <div class="m-4 container-fluid pt-4 px-4 bg-light d-flex align-items-center">
             <div class="row rounded align-items-center justify-content-center mx-auto">
                 @if(auth()->user()->answer_dataIsWrong === 0)
                     <div class="col-md-8 mx-auto text-center p-4">
@@ -90,7 +90,7 @@
 
 @section('content')
 
-<div class="container-fluid vh-100 pt-4">
+<div class="container-fluid vh-auto pt-4">
     <!-- Sale & Revenue Start -->
     {{-- <div class="container-fluid pt-2 px-2"> --}}
 
@@ -467,7 +467,7 @@
 
 
 {{-- Footer --}}
-<div class="container p-4 bg-light">
+<div class="container p-4 bg-light mt-3">
     <div class="row justify-content-evenly align-items-center">
 
         <div class="col-md-5">

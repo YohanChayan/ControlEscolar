@@ -77,7 +77,7 @@
 
 
                     <div class="row my-3">
-                        <div class="form-floating mb-3 col-sm-12 ">
+                        <div class="form-floating mb-3 col-sm-12 col-lg-6">
                             <select class="form-select" name="tramite" id="nombre_tramite" aria-label="Floating label select example">
                                 <option selected=""> - </option>
                                 @foreach($disponibles as $tr)
@@ -86,7 +86,7 @@
                             </select>
                             <label class="px-3" for="nombre_tramite">Seleccione el trámite que desea realizar</label>
                         </div>
-                        <div class="col-sm-12  mb-3 text-center">
+                        <div class="col-sm-12 col-lg-6  mb-3 text-center">
                             <a href="#" class="btn btn-primary rounded-pill m-2" onclick="showRequirements({{$tramites_infoReqs}})">Ver requisitos</a>
                         </div>
                     </div>

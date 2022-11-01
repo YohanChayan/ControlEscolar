@@ -14,8 +14,10 @@
 
     <div class="navbar-nav align-items-center ms-auto">
         <div class="nav-item dropdown">
-            <span class="fw-bold">Ciclo escolar actual: </span>
-            <span class="fw-bold text-primary" id="current_ciclo_value"> {{App\Models\Ciclo::where('selected', true)->first()->semestre ?? 'No asignado'}} </span>
+            <p class="text-center mb-0">
+                <span class="fw-bold small">Ciclo escolar actual: </span>
+                <span class="fw-bold text-primary" id="current_ciclo_value"> {{App\Models\Ciclo::where('selected', true)->first()->semestre ?? 'No asignado'}} </span>
+            </p>
         </div>
     </div>
 
