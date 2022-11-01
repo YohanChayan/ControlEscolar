@@ -8,7 +8,7 @@
 
 <div class="container">
     <div class="row h-100 align-items-center justify-content-center mt-4" style="min-height: 80vh;">
-        <div class="col-8 col-sm-8 col-md-10 col-lg-10 col-xl-10">
+        <div class="col-12 col-sm-12 col-md-10 col-lg-10 col-xl-10">
             <div class="bg-light rounded h-100 p-4">
                 <h2 class="mb-4 text-secondary fw-bold text-center">Solicitud para trámite</h2>
 
@@ -77,7 +77,7 @@
 
 
                     <div class="row my-3">
-                        <div class="form-floating mb-3 col-6">
+                        <div class="form-floating mb-3 col-sm-12 ">
                             <select class="form-select" name="tramite" id="nombre_tramite" aria-label="Floating label select example">
                                 <option selected=""> - </option>
                                 @foreach($disponibles as $tr)
@@ -86,7 +86,7 @@
                             </select>
                             <label class="px-3" for="nombre_tramite">Seleccione el trámite que desea realizar</label>
                         </div>
-                        <div class="col-6 mb-3 text-center">
+                        <div class="col-sm-12  mb-3 text-center">
                             <a href="#" class="btn btn-primary rounded-pill m-2" onclick="showRequirements({{$tramites_infoReqs}})">Ver requisitos</a>
                         </div>
                     </div>
