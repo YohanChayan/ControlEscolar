@@ -185,7 +185,7 @@ class CarreraSeeder extends Seeder
         ]);
         Carrera::create([
             'nombre' => 'Licenciatura en Historia',
-            'clave' => 'HID',
+            'clave' => 'HIS',
             'wrapperID' => 13,
         ]);
         Carrera::create([
@@ -193,11 +193,11 @@ class CarreraSeeder extends Seeder
             'clave' => 'LHT',
             'wrapperID' => 13,
         ]);
-        Carrera::create([
-            'nombre' => 'Licenciatura en Historia',
-            'clave' => 'HIS',
-            'wrapperID' => 13,
-        ]);
+        // Carrera::create([
+        //     'nombre' => 'Licenciatura en Historia',
+        //     'clave' => 'HID',
+        //     'wrapperID' => 13,
+        // ]);
 
         Carrera::create([
             'nombre' => 'Licenciatura en Letras Hispánicas',
@@ -232,7 +232,7 @@ class CarreraSeeder extends Seeder
             'wrapperID' => 16,
         ]);
         Carrera::create([
-            'nombre' => 'Licenciatura en Estudios intrnacionales',
+            'nombre' => 'Licenciatura en Estudios internacionales',
             'clave' => 'EINT',
             'wrapperID' => 16,
         ]);
@@ -242,17 +242,17 @@ class CarreraSeeder extends Seeder
             'wrapperID' => 16,
         ]);
 
-        Carrera::create([
-            'nombre' => 'Licenciatura en Relaciones Internacionales',
-            'clave' => 'REIN',
-            'wrapperID' => 16,
-        ]);
-
-        Carrera::create([
-            'nombre' => 'Licenciatura en Relaciones Internacionales',
-            'clave' => 'LRIN',
-            'wrapperID' => 16,
-        ]);
+//         Carrera::create([
+//             'nombre' => 'Licenciatura en Relaciones Internacionales',
+//             'clave' => 'REIN',
+//             'wrapperID' => 16,
+//         ]);
+//
+//         Carrera::create([
+//             'nombre' => 'Licenciatura en Relaciones Internacionales',
+//             'clave' => 'LRIN',
+//             'wrapperID' => 16,
+//         ]);
 
         Carrera::create([
             'nombre' => 'Licenciatura en Sociología',
@@ -310,17 +310,17 @@ class CarreraSeeder extends Seeder
 
         Carrera::create([
             'nombre' => 'Maestría en Ciencia Política',
-            'clave' => 'MCIP',
-            'wrapperID' => 21,
-        ]);
-        Carrera::create([
-            'nombre' => 'Maestría en Ciencia Política',
-            'clave' => 'MACP',
+            'clave' => 'ICP',
             'wrapperID' => 21,
         ]);
         Carrera::create([
             'nombre' => 'Maestría en Ciencia Política',
             'clave' => 'MICP',
+            'wrapperID' => 21,
+        ]);
+        Carrera::create([
+            'nombre' => 'Maestría en Ciencia Política',
+            'clave' => 'MACP',
             'wrapperID' => 21,
         ]);
         Carrera::create([
@@ -344,12 +344,17 @@ class CarreraSeeder extends Seeder
             'clave' => 'RMSO',
             'wrapperID' => 22,
         ]);
-        Carrera::create([
-            'nombre' => 'Maestría en Ciencias Sociales',
-            'clave' => 'MICG',
-            'wrapperID' => 22,
-        ]);
+        // Carrera::create([
+        //     'nombre' => 'Maestría en Ciencias Sociales',
+        //     'clave' => 'MICG',
+        //     'wrapperID' => 22,
+        // ]);
 
+        Carrera::create([
+            'nombre' => 'MAESTRIA EN CIENCIAS SOCIALES CON ORIENTACION',
+            'clave' => 'MCSC',
+            'wrapperID' => 23,
+        ]);
         Carrera::create([
             'nombre' => 'MAESTRIA EN CIENCIAS SOCIALES CON ORIENTACION',
             'clave' => 'MCSL',
@@ -376,11 +381,11 @@ class CarreraSeeder extends Seeder
             'clave' => 'MICU',
             'wrapperID' => 24,
         ]);
-        Carrera::create([
-            'nombre' => 'Maestría en Comunicación',
-            'clave' => 'MCSC',
-            'wrapperID' => 24,
-        ]);
+        // Carrera::create([
+        //     'nombre' => 'Maestría en Comunicación',
+        //     'clave' => 'MCSC',
+        //     'wrapperID' => 24,
+        // ]);
         Carrera::create([
             'nombre' => 'Maestría en Comunicación',
             'clave' => 'RMCS',
@@ -391,11 +396,11 @@ class CarreraSeeder extends Seeder
             'clave' => 'MACU',
             'wrapperID' => 24,
         ]);
-        Carrera::create([
-            'nombre' => 'Maestría en Comunicación',
-            'clave' => 'MICN',
-            'wrapperID' => 24,
-        ]);
+        // Carrera::create([
+        //     'nombre' => 'Maestría en Comunicación',
+        //     'clave' => 'MICN',
+        //     'wrapperID' => 24,
+        // ]);
 
         Carrera::create([
             'nombre' => 'Maestría en Derecho',
@@ -423,19 +428,24 @@ class CarreraSeeder extends Seeder
             'clave' => 'MDI',
             'wrapperID' => 26,
         ]);
-        Carrera::create([
-            'nombre' => 'MAESTRIA EN DCHO CON ORIENTACION EN DERECHO C',
-            'clave' => 'MCOA',
-            'wrapperID' => 27,
-        ]);
+        // Carrera::create([
+        //     'nombre' => 'MAESTRIA EN DCHO CON ORIENTACION EN DERECHO C',
+        //     'clave' => 'MCOA',
+        //     'wrapperID' => 27,
+        // ]);
     //
         Carrera::create([
-            'nombre' => 'MAESTRIA EN DCHO CON ORIENTACION  DERECHO CORPORATIVO',
+            'nombre' => 'MAESTRIA EN DCHO CON ORIENTACION DERECHO CORPORATIVO',
+            'clave' => 'MCOA',
+            'wrapperID' => 28,
+        ]);
+        Carrera::create([
+            'nombre' => 'MAESTRIA EN DCHO CON ORIENTACION DERECHO CORPORATIVO',
             'clave' => 'MCOR',
             'wrapperID' => 28,
         ]);
         Carrera::create([
-            'nombre' => 'MAESTRIA EN DCHO CON ORIENTACION  DERECHO CORPORATIVO',
+            'nombre' => 'MAESTRIA EN DCHO CON ORIENTACION DERECHO CORPORATIVO',
             'clave' => 'MDCO',
             'wrapperID' => 28,
         ]);
@@ -477,26 +487,25 @@ class CarreraSeeder extends Seeder
         ]);
 
         Carrera::create([
-            'nombre' => 'MAESTRIA EN DERECHO CON ORIENTACION',
-            'clave' => 'MDEE',
-            'wrapperID' => 35,
-        ]);
-
-        Carrera::create([
             'nombre' => 'MAESTRIA EN DERECHO FISCAL',
             'clave' => 'MDF',
+            'wrapperID' => 35,
+        ]);
+        Carrera::create([
+            'nombre' => 'MAESTRIA EN DERECHO CON ORIENTACION',
+            'clave' => 'MDEE',
             'wrapperID' => 36,
         ]);
 
         Carrera::create([
             'nombre' => 'MAESTRIA EN DERECHO CON ORIENTACION',
             'clave' => 'RMDE',
-            'wrapperID' => 35,
+            'wrapperID' => 36,
         ]);
         Carrera::create([
             'nombre' => 'MAESTRIA EN DERECHO CON ORIENTACION',
             'clave' => 'MDNA',
-            'wrapperID' => 35,
+            'wrapperID' => 36,
         ]);
 
         Carrera::create([
@@ -573,11 +582,11 @@ class CarreraSeeder extends Seeder
             'wrapperID' => 45,
         ]);
 
-        Carrera::create([
-            'nombre' => 'Maestría en Estudios de las Lenguas y Culturas Inglesas (Programa Nacional de Posgrados de CONACYT)',
-            'clave' => 'MLEI',
-            'wrapperID' => 45,
-        ]);
+        // Carrera::create([
+        //     'nombre' => 'Maestría en Estudios de las Lenguas y Culturas Inglesas (Programa Nacional de Posgrados de CONACYT)',
+        //     'clave' => 'MLEI',
+        //     'wrapperID' => 45,
+        // ]);
 
         Carrera::create([
             'nombre' => 'Maestría en Estudios de Literatura Mexicana',
@@ -899,17 +908,35 @@ class CarreraSeeder extends Seeder
         Carrera::create([
             'nombre' => 'ESPECIALIDAD EN LA ENSEÑANZA DEL ALEMAN',
             'clave' => 'XEA',
-            'wrapperID' => 82,
+            'wrapperID' => 81,
         ]);
         Carrera::create([
             'nombre' => 'ESPECIALIDAD EN LA ENSEÑANZA DEL ALEMAN',
             'clave' => 'RXEA',
-            'wrapperID' => 83,
+            'wrapperID' => 81,
         ]);
 
         Carrera::create([
             'nombre' => 'ESPECIALIZACION EN EDUCADOR DE CALLE',
             'clave' => 'RXED',
+            'wrapperID' => 82,
+        ]);
+
+        Carrera::create([
+            'nombre' => 'Licenciatura en Relaciones Internacionales',
+            'clave' => 'REIN',
+            'wrapperID' => 83,
+        ]);
+
+        Carrera::create([
+            'nombre' => 'Licenciatura en Relaciones Internacionales',
+            'clave' => 'LRIN',
+            'wrapperID' => 83,
+        ]);
+
+        Carrera::create([
+            'nombre' => 'Lic En Ing. Topográfica',
+            'clave' => 'LRIN',
             'wrapperID' => 84,
         ]);
 

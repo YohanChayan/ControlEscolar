@@ -1,4 +1,6 @@
 @extends('layouts.app')
+@section('content')
+
 
 @can('none')
 {{-- Carga scripts para correccion de registro (student) --}}
@@ -14,7 +16,6 @@
         @endsection
     @endif
 
-    @section('content')
         <div class="m-4 container-fluid pt-4 px-4 bg-light d-flex align-items-center">
             <div class="row rounded align-items-center justify-content-center mx-auto">
                 @if(auth()->user()->answer_dataIsWrong === 0)
@@ -85,16 +86,12 @@
             </div>
 
             @endif
-    @endsection
 @endcan
 
-@section('content')
 
-<div class="container-fluid vh-auto pt-4">
-    <!-- Sale & Revenue Start -->
+@canany(['admin' , 'coordinador'])
+    <div class="container-fluid vh-auto min-vh-100 pt-4">
     {{-- <div class="container-fluid pt-2 px-2"> --}}
-
-        @canany(['admin' , 'coordinador'])
 
         @if (session('estatus'))
             <div class="alert alert-success">
@@ -154,17 +151,17 @@
         </div>
 
         <div class="col-sm-12 col-xl-6 mx-auto">
-        <div class="bg-light rounded h-100 p-4 border border-1">
-            <h4 class="mb-4 text-secondary text-center">Escanee o ingrese código QR</h4>
-            <form action="{{ route('tramites.seguimiento') }}" method="POST">
-                @csrf
-                <input required class="form-control" name="tramite_id" id="tramite_id" style="height: 75px;" ></input>
-                <button type="submit" class="btn btn-primary m-2">Buscar
-                    <i class="far fa-file-alt ms-2"></i>
-                </button>
-            </form>
+            <div class="bg-light rounded h-100 p-4 border border-1">
+                <h4 class="mb-4 text-secondary text-center">Escanee o ingrese código QR</h4>
+                <form action="{{ route('tramites.seguimiento') }}" method="POST">
+                    @csrf
+                    <input required class="form-control" name="tramite_id" id="tramite_id" style="height: 75px;" ></input>
+                    <button type="submit" class="btn btn-primary m-2">Buscar
+                        <i class="far fa-file-alt ms-2"></i>
+                    </button>
+                </form>
+            </div>
         </div>
-    </div>
 
         <div class="col-sm-126 col-xl-3 d-flex align-content-center justify-content-center">
             <div class="bg-light rounded d-flex align-items-center justify-content-center p-4 w-100">
@@ -179,60 +176,62 @@
     </div>
 
         <!-- actividad reciente -->
-        <div class="container-fluid pt-4">
-            <div class="row g-4">
-                <div class="col-sm-12 col-md-8 col-xl-8 px-0 pe-2">
-                    <div class="h-100 bg-light rounded p-3">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <h5 class="mb-0 text-secondary text-center">Actividades Administrativas</h5>
-                            <a href="{{route('logs.index')}}">Mostrar todos</a>
-                        </div>
-
-
-                        {{-- Solo 4 --}}
-                        @foreach($logs_admins as $la)
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img class="rounded-circle flex-shrink-0" src="{{asset('custom/dashboard/img/user-icon.png')}}" alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-2">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">{{$la->user->name}} {{$la->user->apellidos}}</h6>
-                                        <small>{{$la->created_at->diffForHumans()}}</small>
-                                    </div>
-                                    <span>{{$la->action}} <span class="fw-bold">{{$la->target}}</span></span>
-                                </div>
-                            </div>
-                        @endforeach
+        {{-- <div class="container-fluid pt-4"> --}}
+        <div class="row gy-4 mx-auto mt-2">
+            <div class="col-sm-12 col-md-8 col-xl-8 px-0 pe-2">
+                <div class="h-100 bg-light rounded p-3">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h5 class="mb-0 text-secondary text-center">Actividades Administrativas</h5>
+                        <a href="{{route('logs.index')}}">Mostrar todos</a>
                     </div>
+
+
+                    {{-- Solo 4 --}}
+                    @foreach($logs_admins as $la)
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <img class="rounded-circle flex-shrink-0" src="{{asset('custom/dashboard/img/user-icon.png')}}" alt="" style="width: 40px; height: 40px;">
+                            <div class="w-100 ms-2">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">{{$la->user->name}} {{$la->user->apellidos}}</h6>
+                                    <small>{{$la->created_at->diffForHumans()}}</small>
+                                </div>
+                                <span>{{$la->action}} <span class="fw-bold">{{$la->target}}</span></span>
+                            </div>
+                        </div>
+                    @endforeach
                 </div>
+            </div>
 
-                <div class="col-sm-12 col-md-4 col-xl-4 px-0 ps-2">
-                    <div class="h-100 bg-light rounded p-3">
-                        <div class="d-flex align-items-center justify-content-between mb-2">
-                            <h5 class="mb-0 text-secondary text-center">Actividades Estudiantes</h5>
-                            <a href="{{route('logs.index_students')}}">Mostrar todos</a>
-                        </div>
-                        {{-- Solo 4 --}}
-                        @foreach($logs_students as $ls)
-
-                            <div class="d-flex align-items-center border-bottom py-3">
-                                <img class="rounded-circle flex-shrink-0" src="{{asset('custom/dashboard/img/user-icon.png')}}" alt="" style="width: 40px; height: 40px;">
-                                <div class="w-100 ms-2">
-                                    <div class="d-flex w-100 justify-content-between">
-                                        <h6 class="mb-0">Estudiante: {{$ls->user->codigo}}</h6>
-                                        <small>{{$ls->created_at->diffForHumans()}}</small>
-                                    </div>
-                                    <span> <small>{{$ls->action}}</small> <span class="fw-bold">{{$ls->target ?? ''}}</span></span>
-                                </div>
-                            </div>
-
-                        @endforeach
-
+            <div class="col-sm-12 col-md-4 col-xl-4 px-0 ps-2">
+                <div class="h-100 bg-light rounded p-3">
+                    <div class="d-flex align-items-center justify-content-between mb-2">
+                        <h5 class="mb-0 text-secondary text-center">Actividades Estudiantes</h5>
+                        <a href="{{route('logs.index_students')}}">Mostrar todos</a>
                     </div>
+                    {{-- Solo 4 --}}
+                    @foreach($logs_students as $ls)
+
+                        <div class="d-flex align-items-center border-bottom py-3">
+                            <img class="rounded-circle flex-shrink-0" src="{{asset('custom/dashboard/img/user-icon.png')}}" alt="" style="width: 40px; height: 40px;">
+                            <div class="w-100 ms-2">
+                                <div class="d-flex w-100 justify-content-between">
+                                    <h6 class="mb-0">Estudiante: {{$ls->user->codigo}}</h6>
+                                    <small>{{$ls->created_at->diffForHumans()}}</small>
+                                </div>
+                                <span> <small>{{$ls->action}}</small> <span class="fw-bold">{{$ls->target ?? ''}}</span></span>
+                            </div>
+                        </div>
+
+                    @endforeach
+
                 </div>
             </div>
         </div>
 
-        @endcanany
+    </div>
+
+
+    @endcanany
 
     <!-- Recent Sales Start -->
     @can('student')
@@ -245,6 +244,8 @@
             $(document).ready( function () { applyDataTable(); });
         </script>
     @endsection
+
+    <div class="container-fluid vh-auto min-vh-100 pt-4">
 
     <div class="bg-light container-fluid my-3 p-4">
         <div class="text-center rounded ">
@@ -342,128 +343,130 @@
         </div>
 
         <!-- Modal for tramite Review -->
-        <div class="modal fade" data-bs-backdrop="static" id="tramitePreviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog modal-lg ">
-            <div class="modal-content ">
-              <div class="modal-header bg-light">
-                <h5 class="modal-title" id="exampleModalLabel">Vista Previa</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body p-3">
-                <div class="border p-4 bg-light">
-                    <form method="POST" id="formUploadDocuments" enctype="multipart/form-data">
-                        @csrf
+    <div class="modal fade" data-bs-backdrop="static" id="tramitePreviewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-lg ">
+        <div class="modal-content ">
+          <div class="modal-header bg-light">
+            <h5 class="modal-title" id="exampleModalLabel">Vista Previa</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body p-3">
+            <div class="border p-4 bg-light">
+                <form method="POST" id="formUploadDocuments" enctype="multipart/form-data">
+                    @csrf
 
-                        <input type="hidden" name="folioUnico" id="folioUnico">
+                    <input type="hidden" name="folioUnico" id="folioUnico">
 
-                        <div class="row mb-3">
-                            <div class="col-md-6 mx-auto mx-4 text-center" id="estatusContainer">
-                                <label for="estatus" class="col-form-label text-success"><span class="fs-5 fw-bold">Estatus</span></label>
-                                <textarea class="form-control" name="estatus" id="estatus" aria-describedby="estatusHelp" readonly style="height: 75px;"></textarea>
+                    <div class="row mb-3">
+                        <div class="col-md-6 mx-auto mx-4 text-center" id="estatusContainer">
+                            <label for="estatus" class="col-form-label text-success"><span class="fs-5 fw-bold">Estatus</span></label>
+                            <textarea class="form-control" name="estatus" id="estatus" aria-describedby="estatusHelp" readonly style="height: 75px;"></textarea>
 
-                                {{-- <div id="nombre_tramiteHelp" class="form-text">Ingrese nombre del nuevo tipo de trámite</div> --}}
-                            </div>
-
-
-                            <div class="col-md-7 d-none text-center" id="motivoContainer">
-
-                                <label for="motivo" class="col-form-label text-secondary"><span class="fs-5 fw-bold">Motivo</span></label>
-                                <textarea class="form-control" name="motivo" id="motivo" aria-describedby="motivoHelp" readonly style="height: 80px;"> </textarea>
-                            </div>
-
+                            {{-- <div id="nombre_tramiteHelp" class="form-text">Ingrese nombre del nuevo tipo de trámite</div> --}}
                         </div>
 
-                        <div class="row g-3">
-                            <div class="mb-3 col-md-6">
-                                <label for="email" class="form-label">Correo</label>
-                                <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" readonly>
-                                <div id="emailHelp" class="form-text">Es importante destacar que por este medio se le notificará sobre el estado de su trámite.
-                                </div>
-                            </div>
-                            <div class="mb-3 col-md-6">
-                                <label for="codigo" class="form-label">Código</label>
-                                <input type="text" class="form-control" name="codigo" id="codigo"   readonly>
-                            </div>
+
+                        <div class="col-md-7 d-none text-center" id="motivoContainer">
+
+                            <label for="motivo" class="col-form-label text-secondary"><span class="fs-5 fw-bold">Motivo</span></label>
+                            <textarea class="form-control" name="motivo" id="motivo" aria-describedby="motivoHelp" readonly style="height: 80px;"> </textarea>
                         </div>
 
-                        <div class="row g-3">
-                            <div class="mb-3 col-md-6">
-                                <label for="name" class="form-label">Nombres</label>
-                                <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp"  readonly="">
+                    </div>
 
-                            </div>
-                            <div class="mb-4 col-md-6">
-                                <label for="apellidos" class="form-label">Apellidos</label>
-                                <input type="text" class="form-control" name="apellidos" id="apellidos" aria-describedby="emailHelp" readonly>
+                    <div class="row g-3">
+                        <div class="mb-3 col-md-6">
+                            <label for="email" class="form-label">Correo</label>
+                            <input type="email" name="email" class="form-control" id="email" aria-describedby="emailHelp" readonly>
+                            <div id="emailHelp" class="form-text">Es importante destacar que por este medio se le notificará sobre el estado de su trámite.
                             </div>
                         </div>
+                        <div class="mb-3 col-md-6">
+                            <label for="codigo" class="form-label">Código</label>
+                            <input type="text" class="form-control" name="codigo" id="codigo"   readonly>
+                        </div>
+                    </div>
 
-                        <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                <label for="carrera" class="form-label">Carrera</label>
-                                <input type="text" class="form-control" name="carrera" id="carrera" aria-describedby="emailHelp" readonly>
-                            </div>
+                    <div class="row g-3">
+                        <div class="mb-3 col-md-6">
+                            <label for="name" class="form-label">Nombres</label>
+                            <input type="text" class="form-control" name="name" id="name" aria-describedby="emailHelp"  readonly="">
 
-                            <div class="col-md-3">
-                                <label for="ciclo" class="form-label">Ciclo de admisión</label>
-                                <input type="text" class="form-control" name="ciclo" id="ciclo" aria-describedby="emailHelp" readonly>
-                            </div>
+                        </div>
+                        <div class="mb-4 col-md-6">
+                            <label for="apellidos" class="form-label">Apellidos</label>
+                            <input type="text" class="form-control" name="apellidos" id="apellidos" aria-describedby="emailHelp" readonly>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-center">
+                        <div class="col-md-8">
+                            <label for="carrera" class="form-label">Carrera</label>
+                            <input type="text" class="form-control" name="carrera" id="carrera" aria-describedby="emailHelp" readonly>
                         </div>
 
-                        {{-- No se usará, POR LOS MOMENTOS --}}
-                        {{-- <div class="row g-3" id="filesContainer">
-                            <div class="mb-3 col-md-6">
-                                <label for="documents" class="form-label">Archivos</label>
-                                <input type="file" class="form-control" name="documents[]" id="documents" multiple accept="application/pdf">
-                                <a onclick="uploadDocuments()" class="my-2 btn btn-primary">Subir archivos</a>
-                                <small class="d-none text-danger" id="error_cantidad_files"> Debe subir la misma cantidad de archivos que se le haya especificado.</small>
-                            </div>
+                        <div class="col-md-3">
+                            <label for="ciclo" class="form-label">Ciclo de admisión</label>
+                            <input type="text" class="form-control" name="ciclo" id="ciclo" aria-describedby="emailHelp" readonly>
+                        </div>
+                    </div>
 
-                            <div class="pt-1 col-md-6 border border-2">
-                                <p class="text-center fw-bold mb-1 "> Entrega virtual </p>
-                                <span class="text-secondary text-center">Los siguientes archivos deben ser subidos en formato <span class="fw-bold">PDF</span> y por <span class="fw-bold">archivos separados</span>: </span>
-                                <ul class="mt-2" id="list_requirements_files">
-
-                                    <li class="text-secondary"> constancia de algo3 </li>
-                                </ul>
-                                <span class="fw-bold"> Estatus de Documentos:
-                                    <span class="text-danger" id="docsEstatus"> Por entregar </span>
-                                </span>
-                            </div>
-                        </div> --}}
-
-                        <div class="row mt-2" id="container_list_requirements_presencial">
-                            <div class="col-md-7 mx-auto border border-2">
-                                <p class="text-center fw-bold mb-1"> Entrega presencial </p>
-                                <span class="text-secondary text-center">Los siguientes requerimientos deben ser entregados de <span class="fw-bold">forma presencial</span>: </span>
-                                <ul class="mt-2" id="list_requirements_presencial">
-                                    <li class="text-secondary"> constancia de algo3 </li>
-                                </ul>
-                            </div>
+                    {{-- No se usará, POR LOS MOMENTOS --}}
+                    {{-- <div class="row g-3" id="filesContainer">
+                        <div class="mb-3 col-md-6">
+                            <label for="documents" class="form-label">Archivos</label>
+                            <input type="file" class="form-control" name="documents[]" id="documents" multiple accept="application/pdf">
+                            <a onclick="uploadDocuments()" class="my-2 btn btn-primary">Subir archivos</a>
+                            <small class="d-none text-danger" id="error_cantidad_files"> Debe subir la misma cantidad de archivos que se le haya especificado.</small>
                         </div>
 
-                        <div class="row mt-3 gx-3 justify-content-center">
-                            <div class="col-md-6 border">
-                                <p class="text-secondary"><span class="fw-bold">Recuerde</span> que una vez que se le da seguimiento a su trámite, dichos requerimientos pueden variar dependiendo del estudiante.</p>
-                            </div>
-                            <div class="col-md-6 border">
-                                <p class="text-secondary my-1">En caso de que su trámite se encuentre en estatus: <span class="fw-bold">Listo para entrega</span> debe dirigirse a control escolar con la referencia de su trámite. </p>
-                            </div>
-                        </div>
-                </form>
-                </div>
+                        <div class="pt-1 col-md-6 border border-2">
+                            <p class="text-center fw-bold mb-1 "> Entrega virtual </p>
+                            <span class="text-secondary text-center">Los siguientes archivos deben ser subidos en formato <span class="fw-bold">PDF</span> y por <span class="fw-bold">archivos separados</span>: </span>
+                            <ul class="mt-2" id="list_requirements_files">
 
-              </div>
-              <div class="modal-footer bg-light">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              </div>
+                                <li class="text-secondary"> constancia de algo3 </li>
+                            </ul>
+                            <span class="fw-bold"> Estatus de Documentos:
+                                <span class="text-danger" id="docsEstatus"> Por entregar </span>
+                            </span>
+                        </div>
+                    </div> --}}
+
+                    <div class="row mt-2" id="container_list_requirements_presencial">
+                        <div class="col-md-7 mx-auto border border-2">
+                            <p class="text-center fw-bold mb-1"> Entrega presencial </p>
+                            <span class="text-secondary text-center">Los siguientes requerimientos deben ser entregados de <span class="fw-bold">forma presencial</span>: </span>
+                            <ul class="mt-2" id="list_requirements_presencial">
+                                <li class="text-secondary"> constancia de algo3 </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 gx-3 justify-content-center">
+                        <div class="col-md-6 border">
+                            <p class="text-secondary"><span class="fw-bold">Recuerde</span> que una vez que se le da seguimiento a su trámite, dichos requerimientos pueden variar dependiendo del estudiante.</p>
+                        </div>
+                        <div class="col-md-6 border">
+                            <p class="text-secondary my-1">En caso de que su trámite se encuentre en estatus: <span class="fw-bold">Listo para entrega</span> debe dirigirse a control escolar con la referencia de su trámite. </p>
+                        </div>
+                    </div>
+            </form>
             </div>
+
+          </div>
+          <div class="modal-footer bg-light">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>
+      </div>
+    {{-- </div> --}}
+
+</div>
 
     </div>
+
     @endcan
-</div>
 
 
 {{-- Footer --}}
