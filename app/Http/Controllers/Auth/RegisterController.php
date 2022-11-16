@@ -113,6 +113,7 @@ class RegisterController extends Controller
         }
 
         return User::create([
+            'role' => 'noVerified',
             'name' => $data['name'],
             'email' => $data['email'],
             'apellidos' => $data['apellidos'],

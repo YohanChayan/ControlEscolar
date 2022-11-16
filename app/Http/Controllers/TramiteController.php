@@ -356,16 +356,13 @@ class TramiteController extends Controller
         $log->target = $new_procedure->id;
         $log->save();
 
-        // $request->user()->notify(new TramiteProcesado($new_procedure));
 
         $message = '';
-        // dd($tramite_type);
         if($tramite_type->aviso != 'Sin aviso')
             $message = $tramite_type->aviso;
 
         Alert::success('Trámite ha sido iniciado!', $message);
         return redirect()->route('home');
-        // ->with('estatus', 'El trámite ha sido iniciado!');
     }
 
     public function found_tramite(Request $request)

@@ -15,11 +15,11 @@
             </script>
         @endsection
     @endif
-
-        <div class="m-4 container-fluid pt-4 px-4 bg-light d-flex align-items-center">
-            <div class="row rounded align-items-center justify-content-center mx-auto">
+        <div class="container-fluid vh-auto min-vh-100 pt-4">
+            <div class="m-4 container-fluid pt-4 px-4 bg-light d-flex align-items-center min-vh-100">
+                <div class="row rounded align-items-center justify-content-center">
                 @if(auth()->user()->answer_dataIsWrong === 0)
-                    <div class="col-md-8 mx-auto text-center p-4">
+                    <div class="col-md-8 mx-auto text-center p-4 min-vh-100">
                         <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
                         <h1 class="mb-4">Usted no tiene acceso a esta página</h1>
                         <p class="mb-4">En caso de ser primera vez en el sitio, deberá esperar a que control escolar valide su información.</p>
@@ -29,7 +29,7 @@
                     </div>
 
                 @elseif(auth()->user()->answer_dataIsWrong === -1)
-                    <div class="col-md-8 mx-auto text-center p-4">
+                    <div class="col-md-8 mx-auto text-center p-4 min-vh-100">
                         <i class="bi bi-exclamation-triangle display-1 text-primary"></i>
                         <h2 class="mb-4">Su solicitud ha sido enviada y será evaluada!</h2>
                         <p class="mb-4">No olvide revisar constantemente!.</p>
@@ -55,6 +55,8 @@
                 <div class="col-md-10 mx-auto text-center">
                     <a onclick="showErrorsModal()" class="btn btn-lg btn-success">Corregir</a>
                 </div>
+            </div>
+
             </div>
         </div>
 
@@ -229,12 +231,9 @@
         </div>
 
     </div>
+@endcanany
 
-
-    @endcanany
-
-    <!-- Recent Sales Start -->
-    @can('student')
+@can('student')
 
     {{-- Carga scripts para dashboard student --}}
     @section('my_scripts')
@@ -465,9 +464,7 @@
 </div>
 
     </div>
-
-    @endcan
-
+@endcan
 
 {{-- Footer --}}
 <div class="container p-4 bg-light mt-3">
@@ -493,5 +490,4 @@
     </div>
 
 </div>
-
 @endsection

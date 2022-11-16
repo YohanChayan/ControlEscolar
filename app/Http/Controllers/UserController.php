@@ -278,4 +278,13 @@ class UserController extends Controller
 
     }
 
+    function removeMyself(Request $request)
+    {
+        alert::toast('Su cuenta ha sido eliminada satisfactoriamente!', 'success');
+        $urs = User::find(auth()->user()->id)->delete();
+
+        // $request->session()->flash('success', 'Form has been saved');
+        return redirect('login');
+    }
+
 }

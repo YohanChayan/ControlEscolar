@@ -14,7 +14,7 @@ class AddFieldsToUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('role')->default('none');
+            $table->string('role')->default('none'); //admin, coordinador, student, noVerified
             $table->string('apellidos')->default('');
             $table->string('codigo')->unique();
             $table->string('clave_carrera')->nullable();

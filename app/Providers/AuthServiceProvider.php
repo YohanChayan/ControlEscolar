@@ -38,6 +38,10 @@ class AuthServiceProvider extends ServiceProvider
             return ($user->role == 'coordinador' && $user->estatus == 'Activo' );
         });
 
+        Gate::define('noVerified', function(User $user) {
+            return ($user->role == 'noVerified' && $user->estatus == 'Activo' );
+        });
+
         Gate::define('none', function(User $user) {
             return $user->role == 'none';
         });

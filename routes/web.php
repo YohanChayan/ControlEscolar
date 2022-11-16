@@ -37,7 +37,6 @@ Route::group(['middleware' => ['auth']], function(){
 
         Route::get('/', [HomeController::class, 'index'])->name('home');
 
-
             Route::group([ 'prefix' => 'administrativo' , 'middleware' => ['is_admin'] ], function(){
                 //Rutas para administrativos
                 Route::resource('userAccess', AccessUserController::class )->only('index' , 'destroy');
@@ -125,6 +124,13 @@ Route::group(['middleware' => ['auth']], function(){
                 Route::post('/fixStudentData', [UserController::class, 'fix_data_errors'])->name('users.fixStudentData');
 
     });
+
+
+    // Correo no verificado -caso especial-
+    Route::group(['middleware' => ['is_noVerified']], function(){
+        Route::post('/removeMyself', [UserController::class, 'removeMyself'])->name('userAccess.removeMyself');
+    });
+
 });
 
 // Auth::routes();

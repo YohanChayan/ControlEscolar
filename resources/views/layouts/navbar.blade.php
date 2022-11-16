@@ -1,4 +1,6 @@
 <script src="{{ asset('js/app.js') }}" defer></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{{asset('js/NoVerified.js')}}"></script>
 
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
@@ -11,7 +13,6 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Left Side Of Navbar -->
             <ul class="navbar-nav me-auto">
 
             </ul>
@@ -43,6 +44,13 @@
                                              document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
+                            <a class="dropdown-item mt-3 pt-2 border-top" style="cursor:pointer;" onclick="rm_myself()">
+                                Eliminar cuenta
+                            </a>
+
+                            <form id="rm_myself-form" action="{{route('userAccess.removeMyself')}}" method="POST" class="d-none">
+                                @csrf
+                            </form>
 
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf
