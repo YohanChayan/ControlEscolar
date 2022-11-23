@@ -104,7 +104,7 @@
         <div class="row g-4">
             <div class="col-sm-6 col-xl-3">
                 <div class="bg-light rounded d-flex align-items-center justify-content-center p-4">
-                    <i class="fa fa-chart-line fa-3x m-3 text-primary"></i>
+                    <i class="fas fa-user-graduate fa-3x m-3 text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Estudiantes activos</p>
                         <h6 class="mb-0">{{$students_count}}</h6>
@@ -113,7 +113,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="bg-light rounded d-flex align-items-center justify-content-center p-4">
-                    <i class="fa fa-chart-bar fa-3x m-3 text-primary"></i>
+                    <i class="fas fa-calendar-day fa-3x m-3 text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Trámites solicitados hoy</p>
                         <h6 class="mb-0">{{$tramites_today}}</h6>
@@ -122,7 +122,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="bg-light rounded d-flex align-items-center justify-content-center p-4">
-                    <i class="fa fa-chart-area fa-3x m-3 text-primary"></i>
+                    <i class="far fa-tasks fa-3x m-3 text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Trámites Pendientes</p>
                         <h6 class="mb-0">{{$Tpendientes}}</h6>
@@ -131,7 +131,7 @@
             </div>
             <div class="col-sm-6 col-xl-3">
                 <div class="bg-light rounded d-flex align-items-center justify-content-center p-4">
-                    <i class="fa fa-chart-pie fa-3x m-3 text-primary"></i>
+                    <i class="far fa-clipboard-check fa-3x m-3 text-primary"></i>
                     <div class="ms-3">
                         <p class="mb-2">Trámites Completados</p>
                         <h6 class="mb-0">{{$finished_tramites}}</h6>
@@ -144,7 +144,7 @@
 
         <div class="col-sm-12 col-xl-3 d-flex align-content-center justify-content-center">
             <div class="bg-light rounded d-flex align-items-center justify-content-center p-4 w-100">
-                <i class="fa fa-chart-pie fa-4x m-3 text-primary"></i>
+                <i class="fas fa-key fa-4x m-3 text-primary"></i>
                 <div class="ms-3">
                     <p class="mb-2">Solicitudes de acceso de estudiantes</p>
                     <h6 class="mb-0">{{$pending_students}}</h6>
@@ -167,7 +167,7 @@
 
         <div class="col-sm-126 col-xl-3 d-flex align-content-center justify-content-center">
             <div class="bg-light rounded d-flex align-items-center justify-content-center p-4 w-100">
-                <i class="fa fa-chart-pie fa-4x m-3 text-primary"></i>
+                <i class="far fa-exchange-alt fa-4x m-3 text-primary"></i>
                 <div class="ms-3">
                     <p class="mb-2">Solicitudes de cambio de carrera</p>
                     <h6 class="mb-0">{{$changeCareers_count}}</h6>
@@ -467,26 +467,44 @@
 @endcan
 
 {{-- Footer --}}
-<div class="container p-4 bg-light mt-3">
-    <div class="row justify-content-evenly align-items-center">
+<div class="p-4 bg-light mt-3">
+    <div class="col-12">
+        <div class="row justify-content-evenly align-items-center">
+            <div class="col-md-5">
+                <div class="d-flex align-items-center">
+                    {{-- <img src="{{asset('custom/dashboard/img/cta_logo.jpg')}}" class="img-fluid border border-2" alt="CTA"> --}}
+                    <img src="{{asset('custom/dashboard/img/TCE_footer.jpeg')}}" class="img-fluid border border-2" height="100" alt="CTA">
+                </div>
+            </div>
 
-        <div class="col-md-5">
-            <div class="d-flex align-items-center">
-                <img src="{{asset('custom/dashboard/img/cta_logo.jpg')}}" class="img-fluid border border-2" alt="CTA">
+            <div class="col-md-5">
+                <h5 class="text-uppercase my-4 font-weight-bold text-secondary">Contacto</h5>
+                <p class="fs-5 mb-1"><i class="fas fa-envelope"></i> plataforma.tce.cucsh@administrativos.udg.mx</p>
+                <p class="fs-5"><i class="fas fa-phone "></i> +52 33 3819 3300 ext: 23715</p>
+
+                <h5 class="text-uppercase mb-3 mt-5 font-weight-bold text-secondary">Creadores</h5>
+                <p class="fs-5 mb-1"><i class="fas fa-user"></i> Olga Lidia Garcia Zambrano </p>
+                <p class="fs-5"><i class="fas fa-user"></i> Rodrigo Gómez Morales</p>
             </div>
         </div>
 
-        <div class="col-md-5">
-            <h5 class="text-uppercase my-4 font-weight-bold text-secondary">Contacto</h5>
-                <p><i class="fas fa-envelope"></i> cta.cucsh@administrativos.udg.mx</p>
-                <p><i class="fas fa-phone "></i> +52 33 3819 3300 ext: 23609</p>
+        <div class="col-md-8 mx-auto Creadores">
+            {{-- <p class="text-center">
+                <h5 class="text-secondary text-center">Creadores: </h5>
+                <p class="text-secondary m-0 text-center"> <i class="fas fa-user"></i> Coordinadora Olga</p>
+                <p class="text-secondary m-0 text-center"> <i class="fas fa-user"></i> Licenciado Rodrigo</p>
+            </p> --}}
         </div>
     </div>
 
     <hr class="my-3">
     <div class="p-2">
-          <p class="mb-2">Coordinación de Tecnologias para el Aprendizaje - Universidad de Guadalajara</p>
-          <small class="fst-italic">Desarrollado por: Yohan Chayan</small>
+    <div class="col-md-4 text-center mx-auto">
+        <img src="{{asset('custom/dashboard/img/cta_logo.jpg')}}" class="img-fluid border" alt="CTA">
+    </div>
+        <p class="my-2 text-center">Coordinación de Tecnologías para el Aprendizaje - Universidad de Guadalajara</p>
+
+          <small class="fst-italic text-center fw-bold">Desarrollado por: Yohan Chayan</small>
     </div>
 
 </div>

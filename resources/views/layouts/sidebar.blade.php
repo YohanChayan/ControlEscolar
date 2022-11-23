@@ -8,7 +8,8 @@
         </a> --}}
         <div class="d-flex align-items-center mb-2 mt-5 mt-lg-1">
             <a href="{{route('home')}}" class="nav-item nav-link active">
-                <img class="img-fluid" src="{{asset('custom/dashboard/img/logo_cucsh.png')}}" alt="logo cucsh">
+                {{-- <img class="img-fluid" src="{{asset('custom/dashboard/img/logo_cucsh.png')}}" alt="logo cucsh"> --}}
+                <img class="img-fluid" src="{{asset('custom/dashboard/img/TCE_logo.png')}}" alt="logo cucsh">
             </a>
         </div>
         <div class="navbar-nav w-100">
