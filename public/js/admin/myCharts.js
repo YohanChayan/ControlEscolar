@@ -1,17 +1,3 @@
-// function loadingSpinner()
-// {
-//     const spinner = document.createElement('div');
-//     spinner.classList.add('spinner-border', 'text-primary');
-//     spinner.setAttribute('role' , 'estatus');
-//     spinner.id = 'waiting_chart_spinner';
-//     const spinner_span = document.createElement('span');
-//     spinner_span.classList.add('visually-hidden')
-//     spinner_span.innerText = 'Cargando...';
-//     spinner.append(spinner_span);
-//
-//     document.querySelector('#tramites_mesContainer').prepend(spinner);
-// }
-
 var alreadyLoaded = {
     'tramites_mes': false,
     'top_tramites': false,
@@ -56,11 +42,7 @@ function load_chart_TramitesMonths(data)
     const arrayMonthsLabel = ['Enero','Febrero','Marzo','Abril','Mayo','Junio','Julio','Agosto','Septiembre','Octubre','Noviembre','Diciembre'];
 
     const indexes = Object.getOwnPropertyNames(data[0]); //only indexes
-    console.log(indexes);
 
-    // for (item of indexes) {
-    //     console.log(item)
-    // }
 
     // Single line
     var ctx1 = $("#tramites_mes_chart").get(0).getContext("2d");
@@ -139,7 +121,6 @@ function load_chart_topTramites(data)
 function load_chart_summaryTramites(data)
 {
     // Single Bar Chart
-     console.log(data)
     var ctx3 = $("#summary_tramites_chart").get(0).getContext("2d");
     var myChart3 = new Chart(ctx3, {
         type: "bar",

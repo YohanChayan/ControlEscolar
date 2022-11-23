@@ -470,34 +470,40 @@
 <div class="p-4 bg-light mt-3">
     <div class="col-12">
         <div class="row justify-content-evenly align-items-center">
-            <div class="col-md-5">
-                <div class="d-flex align-items-center">
-                    {{-- <img src="{{asset('custom/dashboard/img/cta_logo.jpg')}}" class="img-fluid border border-2" alt="CTA"> --}}
-                    <img src="{{asset('custom/dashboard/img/TCE_footer.jpeg')}}" class="img-fluid border border-2" height="100" alt="CTA">
-                </div>
+            <div class="col-10 col-md-4">
+                {{-- <div class="d-flex align-items-center"> --}}
+                <img src="{{asset('custom/dashboard/img/TCE_footer.jpeg')}}" class="img-fluid border border-2" height="100" alt="CTA">
+                {{-- </div> --}}
             </div>
 
-            <div class="col-md-5">
-                <h5 class="text-uppercase my-4 font-weight-bold text-secondary">Contacto</h5>
-                <p class="fs-5 mb-1"><i class="fas fa-envelope"></i> plataforma.tce.cucsh@administrativos.udg.mx</p>
-                <p class="fs-5"><i class="fas fa-phone "></i> +52 33 3819 3300 ext: 23715</p>
+            <div class="col-md-5 my-2">
+                <h5 class="text-uppercase mb-3 font-weight-bold text-secondary text-center text-lg-start">Contacto</h5>
+                <p class="fs-5 mb-3 mb-lg-2 text-center text-lg-start"><i class="fas fa-envelope d-block d-lg-inline"></i> plataforma.tce.cucsh@administrativos.udg.mx</p>
+                <p class="fs-5 text-center text-lg-start">
+                    <i class="fas fa-phone d-block d-lg-inline"></i>
+                    +52 33 3819 3300 ext: 23715
+                </p>
 
-                <h5 class="text-uppercase mb-3 mt-5 font-weight-bold text-secondary">Creadores</h5>
-                <p class="fs-5 mb-1"><i class="fas fa-user"></i> Olga Lidia Garcia Zambrano </p>
-                <p class="fs-5"><i class="fas fa-user"></i> Rodrigo Gómez Morales</p>
+
+                <h5 class="text-uppercase mb-3 mt-4 font-weight-bold text-secondary text-center text-lg-start">Creadores</h5>
+
+                <p class="fs-5 mb-1 text-center text-lg-start">
+                    <i class="fas fa-user"></i>
+                    Olga Lidia Garcia Zambrano
+                </p>
+                <p class="fs-5 text-center text-lg-start">
+                    <i class="fas fa-user"></i>
+                    Rodrigo Gómez Morales
+                </p>
             </div>
         </div>
 
-        <div class="col-md-8 mx-auto Creadores">
-            {{-- <p class="text-center">
-                <h5 class="text-secondary text-center">Creadores: </h5>
-                <p class="text-secondary m-0 text-center"> <i class="fas fa-user"></i> Coordinadora Olga</p>
-                <p class="text-secondary m-0 text-center"> <i class="fas fa-user"></i> Licenciado Rodrigo</p>
-            </p> --}}
-        </div>
+        {{-- <div class="col-md-8 mx-auto Creadores">
+
+        </div> --}}
     </div>
 
-    <hr class="my-3">
+    <hr class="my-1">
     <div class="p-2">
     <div class="col-md-4 text-center mx-auto">
         <img src="{{asset('custom/dashboard/img/cta_logo.jpg')}}" class="img-fluid border" alt="CTA">

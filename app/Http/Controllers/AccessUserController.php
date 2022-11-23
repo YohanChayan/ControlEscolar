@@ -23,7 +23,10 @@ class AccessUserController extends Controller
         // $this->authorize('admin');
         $data = $this->refresh_adminTable();
 
+        // Carga de datos DT en mini-vista
         $html_table = view('admin.accesos.ajax.index_accesosAdminTable')->with('admins', $data)->render();
+
+        // retorna vista con datos ya procesados
         return view('admin.accesos.indexAdmins')->with('data', $html_table);
     }
 
@@ -38,9 +41,14 @@ class AccessUserController extends Controller
         ->orderBy('created_at', 'desc')
         ->paginate(10);
 
+        // Paginador: Evitar la carga masiva en tabla --solo carga 10 a la vez
+
         $html_table = view('admin.accesos.ajax.index_accesosStudentTable')->with('students', $data);
+
+        // Retorna vista con datos ya procesados
         return view('admin.accesos.indexStudents')->with('data', $html_table);
     }
+
 
     // refresh admins table
     public function refresh_adminTable()

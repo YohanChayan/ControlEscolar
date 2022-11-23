@@ -2,7 +2,6 @@
 
 @section('my_scripts')
     <script src="{{asset('custom/dashboard/lib/chart/chart.min.js')}}"></script>
-
     <script src="{{asset('js/admin/myCharts.js')}}"></script>
 @endsection
 
