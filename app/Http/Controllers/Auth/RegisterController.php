@@ -52,7 +52,8 @@ class RegisterController extends Controller
         //explicit return to view users register
 
         $ciclos = Ciclo::select('semestre')->orderBy('semestre', 'desc')->get();
-        $careers = Carrera::select('id', DB::raw("CONCAT(clave, ' - ', nombre) AS nombre") )->get();
+        $careers = Carrera::get();
+        // $careers = Carrera::select('id', DB::raw("CONCAT(clave, ' - ', nombre) AS nombre") )->get();
 
         return view('auth.register')
             ->with('carreras', $careers)
@@ -68,19 +69,18 @@ class RegisterController extends Controller
      */
     protected function validator(array $data)
     {
-        if(strlen($data['codigo']) == 9){
-
+        if(strlen($data['codigo']) > 7){
             $validated =  Validator::make($data, [
                 'name' => ['required', 'string', 'max:255'],
                 'email' => ['required', 'string', 'email', 'max:255', 'confirmed' ,'unique:users'],
                 'apellidos' => ['required', 'string', 'max:255'],
                 'codigo' => ['required', 'string', 'min:9' , 'max:9','unique:users'],
+                'identity_career' => ['required' , 'string'],
                 'telefono' => ['required', 'string', 'min:10' , 'max:15'],
                 'carrera' => ['required', 'string'],
                 'ciclo_admision' => ['required', 'string', 'max:255'],
                 'password' => ['required', 'string', 'min:8', 'confirmed'],
             ]);
-
             return $validated;
         }
 
@@ -93,8 +93,6 @@ class RegisterController extends Controller
             'password' => ['required', 'string', 'min:8', 'confirmed'],
         ]);
 
-            // 'regex:/(.*)@(academicos|administrativos)\.udg.mx/i',
-
         return $validated;
     }
 
@@ -106,7 +104,8 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        $career = explode(' - ', $data['carrera'] );
+        // dd($data);
+        $career = explode(' - ', $data['identity_career'] );
         if(strlen($data['codigo']) == 7){
             $career[0] = null;
             $career[1] = null;

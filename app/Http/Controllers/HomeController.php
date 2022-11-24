@@ -57,10 +57,14 @@ class HomeController extends Controller
             $records_students = Log::with('user')->where('type', 'student')->latest()->get()->take(4);
             // dd($records);
 
-            $IsThere_notAvailable_tramites = Tramite::where('disponible', 0)->get();
+            $isThere_notAvailable_tramites = Tramite::select('nombre_tramite')->where('disponible', 0)->get();
 
-            if(count($IsThere_notAvailable_tramites)){
-                Alert::toast('Algunos trámites se encuentra desactivados para los estudiantes', 'warning');
+            if(count($isThere_notAvailable_tramites)){
+                $list_notAvailable = '<ul>';
+                foreach($isThere_notAvailable_tramites as $item )
+                    $list_notAvailable .= '<li> '. $item->nombre_tramite .'  <small class="text-danger fw-bold">(No disponible)</small> </li>';
+                $list_notAvailable .= '</ul>';
+                toast()->html('<strong>Los siguientes trámites estan desactivados para los estudiantes: </strong>',$list_notAvailable,'warning');
             }
 
 

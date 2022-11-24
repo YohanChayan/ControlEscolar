@@ -54,24 +54,6 @@
                             </div>
                         @endif
 
-                        {{-- <div class="row mb-3">
-                            <label for="user_type" class="col-md-4 col-form-label text-md-end">{{ __('Tipo de cuenta') }}<span class="my-required-asterisk"></span> </label>
-
-                            <div class="col-md-6">
-
-                                <select name="user_type" id="user_type" class="form-select mb-3" aria-label="Default select example" required >
-                                    <option value="" >Seleccione el tipo de cuenta</option>
-                                    <option value="student" >Estudiante</option>
-                                    <option value="admin">Administrativo</option>
-                                </select>
-
-                                @error('user_type')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div> --}}
 
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombres') }}<span class="my-required-asterisk"></span> </label>
@@ -137,7 +119,7 @@
                                 <input name="carrera" class="form-control" list="carrera_list_options" id="carrera" placeholder="Ingrese el nombre de la carrera..." value="{{ old('carrera') }}">
                                     <datalist id="carrera_list_options">
                                     @foreach($carreras as $car)
-                                        <option value="{{$car->nombre}}">
+                                        <option value="{{$car->clave}}"> {{$car->nombre}} </option>
                                     @endforeach
                                     </datalist>
 
@@ -230,11 +212,16 @@
                             </div>
                         </div>
 
+                        <input type="hidden" name="identity_career" id="identity_career">
+
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" id="btn-submitRegister" class="btn btn-primary">
+                                {{-- <button type="submit" id="btn-submitRegister" class="btn btn-primary">
                                     {{ __('Register') }}
-                                </button>
+                                </button> --}}
+                                <a id="btn-submitRegister" class="btn btn-primary">
+                                    Registrarse
+                                </a>
                             </div>
                         </div>
                     </form>

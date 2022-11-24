@@ -46,3 +46,16 @@ function detectingCode(value) {
         showDataAnimation = true;
     }
 }
+
+document.querySelector('#btn-submitRegister').addEventListener('click', function(event){
+    event.preventDefault();
+    console.log('event fired')
+    const car = document.querySelector('#carrera').value;
+    if(car){
+        const opt_value_car = document.querySelector(`option[value=${car}]`);
+        console.log(opt_value_car)
+        const identity_career = document.querySelector('#identity_career');
+        identity_career.value = `${opt_value_car.value} - ${opt_value_car.innerText}`
+    }
+    document.querySelector('#registerForm').submit();
+});

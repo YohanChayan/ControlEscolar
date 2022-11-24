@@ -45,7 +45,7 @@
                                 {{ __('Logout') }}
                             </a>
                             <a class="dropdown-item mt-3 pt-2 border-top" style="cursor:pointer;" onclick="rm_myself()">
-                                Eliminar cuenta
+                                <small class="fw-bold text-danger">Eliminar cuenta</small>
                             </a>
 
                             <form id="rm_myself-form" action="{{route('userAccess.removeMyself')}}" method="POST" class="d-none">
