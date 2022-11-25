@@ -5,7 +5,7 @@
 <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
     <div class="container">
         <a class="navbar-brand" href="{{ url('/') }}">
-                <img class="img-fluid" width="40" height="40" src="{{asset('/custom/dashboard/img/favicon.png')}}" alt="logo">
+            <img class="img-fluid mb-1" width="100" height="100" src="{{asset('/custom/dashboard/img/TCE.png')}}" alt="logo">
             Control Escolar
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
