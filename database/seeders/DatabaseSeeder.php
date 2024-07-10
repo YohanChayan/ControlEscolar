@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             CicloSeeder::class,
             UserSeeder::class,
             TramiteSeeder::class,
-            // TramiteSolicitadoSeeder::class,
+            TramiteSolicitadoSeeder::class,
         ]);
     }
 }
